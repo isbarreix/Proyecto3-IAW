@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/isbarreix/Proyecto3-IAW/issues"
   },
-  "homepage": "https://github.com/isbarreix/Proyecto3-IAW#readme"
+  "homepage": "https://github.com/isbarreix/Proyecto3-IAW#readme",
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-animate": "^1.6.4",
+    "angular-aria": "^1.6.4",
+    "angular-material": "^1.1.4",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongojs": "^2.4.0",
+    "ngmap": "^1.18.4"
+  }
 }
