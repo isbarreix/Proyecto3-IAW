@@ -21,8 +21,10 @@
     "angular-animate": "^1.6.4",
     "angular-aria": "^1.6.4",
     "angular-material": "^1.1.4",
+    "angular-messages": "^1.6.4",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
+    "jquery": "^3.2.1",
     "mongojs": "^2.4.0",
     "ngmap": "^1.18.4"
   }

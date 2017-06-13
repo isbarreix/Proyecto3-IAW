@@ -1,0 +1,56 @@
+@font-face{
+    font-family: 'Roboto-Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local("Roboto-Regular"), url('../assets/fonts/Roboto-Regular.otf') format("truetype");
+}
+
+
+html {
+  background: #eee;
+}
+
+body {
+  line-height: 1.4;
+  max-width: 1900px;
+  margin: 20px auto;
+}
+@media only screen and (min-width: 1600px){
+  main-view md-toolbar:not(.md-menu-toolbar) {
+    height: 240px;
+  }
+}
+md-toolbar.md-default-theme.md-hue-2:not(.md-menu-toolbar), md-toolbar.md-hue-2:not(.md-menu-toolbar){
+  /*background-color:#106CC8;*/
+  background-color:#2196F3;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.2);
+}
+md-toolbar.md-tall {
+  height: 240px;
+  min-height: 240px;
+  max-height: 240px;
+}    
+md-toolbar:not(.md-menu-toolbar) .logo-container {           
+  align-items: center;
+  display: flex;
+  flex: 200;
+  height: 40%;
+  justify-content: center;
+  left: 50%;
+  top:25%;
+  position: absolute;
+  right: 50%;
+  margin-top: 21px;
+}
+.md-tab{
+  font-size:125%;
+}
+
+
+
+th, td, md-input-container {
+  font-size:150%;
+}
+md-button{
+  width: 50%;
+}
