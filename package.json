@@ -1,0 +1,19 @@
+{
+  "name": "proyecto_03_iaw2017",
+  "version": "1.0.0",
+  "description": "Proyecto 3 para la materia IAW 2017. Buscador de Bancos y ATM.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isbarreix/Proyecto3-IAW.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isbarreix/Proyecto3-IAW/issues"
+  },
+  "homepage": "https://github.com/isbarreix/Proyecto3-IAW#readme"
+}
