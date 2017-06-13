@@ -43,7 +43,7 @@
       <md-tabs md-dynamic-height="" md-border-bottom="">
         <!--Page 1 Home-->
         <md-tab label="Home">
-          <md-content class="md-padding" ng-controller="TabOne">
+          <md-content class="md-padding" ng-controller="TabOneCtrl">
             <h1 class="md-display-2">Bienvenido a Spyglass: Buscador de Bancos y ATMs</h1>
             <img src="../img/plantilla.png">
             <p>Spyglass es un buscador de X_X implementado por dos estudaintes de Ingenieria en sistemas de Informacion en la universidad nacional del sur (UNS).</p>
@@ -54,7 +54,12 @@
         <md-tab label="Buscador">
           <md-content class="md-padding">
               <!--CONTENIDO PAGE 2 -->
-            <h3>Nada para ver</h3>
+            <h3>Busca tu banco</h3>
+            
+          <div  async defer id="map" ng-controller="MapCtrl">
+            <ng-map center="41,-87" zoom="3"></ng-map>
+          </div>
+            
           </md-content>
         </md-tab>
         <!--Page 3 About-->
