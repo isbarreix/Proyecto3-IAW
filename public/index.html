@@ -74,18 +74,45 @@
               <!--CONTENIDO PAGE 2 -->
             <h3>Busca tu banco</h3>
             
-            <div layout="row" layout-sm="column">
+            <div layout="row" layout-sm="column" ng-controller="MapCtrl">
+              
               <div flex=33>
-                I'm above on mobile, and to the left on larger devices.
-              </div>
-              <div flex=66>
-                <div  async defer id="map" ng-controller="MapCtrl">
+                <md-toolbar md-scroll-shrink ng-if="true">
+                  <div class="md-toolbar-tools md-toolbar-tools-estilo2">
+                    <h3>
+                      <span>Bancos y ATMs</span>
+                    </h3>
+                  </div>
+                </md-toolbar>
+
+                <md-content flex  md-scroll-shrink>
+
+                  <md-list>
+
+                    <md-list-item class="md-3-line" ng-repeat="marker in markerlist" ng-click="null">
+                      <div class="md-list-item-text">
+                        <h3>{{ marker.name }}</h3>
+                        <h4>{{ marker.alt }}</h4>
+                        <h4>{{ marker.lat }}</h4>
+                        <p>{{ marker.descrip }}</p>
+                      </div>
+                      <md-divider inset></md-divider>
+                    </md-list-item>
+
+                  </md-list>
+
+                </md-content>
+              </div>              
+            <md-divider inset></md-divider>
+              <!--Mapa-->
+              <div flex="66">
+                <div  async defer id="map">
                   <ng-map center="41,-87" zoom="3"></ng-map>
                 </div>
               </div>
-            </div>
 
-            
+              
+            </div>            
           </md-content>
         </md-tab>
         
