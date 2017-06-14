@@ -92,8 +92,8 @@
                     <md-list-item class="md-3-line" ng-repeat="marker in markerlist" ng-click="null">
                       <div class="md-list-item-text">
                         <h3>{{ marker.name }}</h3>
-                        <h4>{{ marker.alt }}</h4>
-                        <h4>{{ marker.lat }}</h4>
+                        <h4>{{ marker.pos[0] }}</h4>
+                        <h4>{{ marker.pos[1] }}</h4>
                         <p>{{ marker.descrip }}</p>
                       </div>
                       <md-divider inset></md-divider>
@@ -107,7 +107,16 @@
               <!--Mapa-->
               <div flex="66">
                 <div  async defer id="map">
-                  <ng-map center="41,-87" zoom="3"></ng-map>
+                  <ng-map center="41,-87" zoom="3">
+					
+                      <marker ng-repeat="marker in markerlist"
+                        position="{{ marker.pos[0] }}, {{ marker.pos[1] }}"
+                        on-click="showData()";
+                        title="{{ marker.name }}">
+                      </marker>
+					
+				
+				  </ng-map>
                 </div>
               </div>
 
