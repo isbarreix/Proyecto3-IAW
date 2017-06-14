@@ -46,8 +46,9 @@ md-toolbar:not(.md-menu-toolbar) .logo-container {
   font-size:125%;
 }
 
-
-
+.md-subhead-estilo2{
+  font-size:130%;
+}
 th, td, md-input-container {
   font-size:150%;
 }

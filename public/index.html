@@ -44,24 +44,52 @@
         <!--Page 1 Home-->
         <md-tab label="Home">
           <md-content class="md-padding" ng-controller="TabOneCtrl">
-            <h1 class="md-display-2">Bienvenido a Spyglass: Buscador de Bancos y ATMs</h1>
-            <img src="../img/plantilla.png">
-            <p>Spyglass es un buscador de X_X implementado por dos estudaintes de Ingenieria en sistemas de Informacion en la universidad nacional del sur (UNS).</p>
+            
+            <div layout-gt-sm="row" layout="column" layout-margin>
+              <main flex-md="60">
+                <h1 class="md-display-3">
+                    Bienvenido a Spyglass: Buscador de bancos y ATMs
+                </h1>
+
+                <p class="md-subhead md-subhead-estilo2">
+                  Spyglass es un buscador de Bancos y ATMs implementado por dos estudaintes de Ingenieria en sistemas de Informacion en la universidad nacional del sur (UNS).
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu lectus vel libero porta dictum. Donec a lorem consequat, fermentum lorem sed, sollicitudin neque. Pellentesque placerat interdum orci, eget sodales tortor vehicula id.
+                </p>
+              </main>
+
+              <aside flex-md="20">
+                <img id="img_surf" src="../img/plantilla.png"/>
+              </aside>
+            </div>    
+        
             <p><md-button ng-click="count = count + 1" class="md-raised md-primary">{{title}}</md-button> count: {{count}}</p>
+          
           </md-content>
         </md-tab>
+        
+        
         <!--Page 2 Mapa-->
         <md-tab label="Buscador">
           <md-content class="md-padding">
               <!--CONTENIDO PAGE 2 -->
             <h3>Busca tu banco</h3>
             
-          <div  async defer id="map" ng-controller="MapCtrl">
-            <ng-map center="41,-87" zoom="3"></ng-map>
-          </div>
+            <div layout="row" layout-sm="column">
+              <div flex=33>
+                I'm above on mobile, and to the left on larger devices.
+              </div>
+              <div flex=66>
+                <div  async defer id="map" ng-controller="MapCtrl">
+                  <ng-map center="41,-87" zoom="3"></ng-map>
+                </div>
+              </div>
+            </div>
+
             
           </md-content>
         </md-tab>
+        
+        
         <!--Page 3 About-->
         <md-tab label="About">
           <md-content class="md-padding">
