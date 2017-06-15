@@ -74,7 +74,8 @@
               <!--CONTENIDO PAGE 2 -->
             <h3>Busca tu banco</h3>
             
-            <div layout="row" layout-sm="column" ng-controller="MapCtrl">
+            <div ng-controller="MapCtrl">
+            <div layout="row" layout-sm="column">
               
               <div flex=33>
                 <md-toolbar md-scroll-shrink ng-if="true">
@@ -111,12 +112,8 @@
                 <div id="map">
                 </div>
               </div>
-
-              
             </div> 
-          </md-content>
-            
-                <md-content layout-gt-sm="row" layout-padding>
+              <md-content layout-gt-sm="row" layout-padding>
                 <div>
                   <md-input-container>
                     <label>Usuario</label>
@@ -130,6 +127,17 @@
                   <md-button class="md-raised md-primary" ng-click="addComentario()">Ok</md-button>
                 </div>
               </md-content>
+            <md-list-item class="md-3-line" ng-repeat="comment in comments" ng-click="null">
+                      <div class="md-list-item-text">
+                        <h3>Nombre: {{ comment.name }}</h3>
+                        <h4>Comentario:{{ comment.comment }}</h4>
+                        <!--<p>{{ marker.descrip }}</p>-->
+                      </div>
+                      <md-divider inset></md-divider>
+                    </md-list-item>
+           
+            </div> 
+          </md-content>
         </md-tab>
         
         
