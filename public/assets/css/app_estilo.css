@@ -67,7 +67,15 @@ md-button{
 }
 
 #map{
-  width: 100%; 
-  height: 100%; 
+  width: 65%; 
+  height: 62%; 
   position: absolute;
+}
+
+#markerlist{
+  height:600px;
+}
+
+#markerlist_view{
+  /*height: 25%;*/
 }

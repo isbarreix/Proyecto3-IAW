@@ -70,53 +70,57 @@
         
         <!--Page 2 Mapa-->
         <md-tab label="Buscador">
+          
           <md-content class="md-padding">
               <!--CONTENIDO PAGE 2 -->
             <h3>Busca tu banco</h3>
             
             <div ng-controller="MapCtrl">
-            <div layout="row" layout-sm="column">
-              
-              <div flex=33>
-                <md-toolbar md-scroll-shrink ng-if="true">
-                  <div class="md-toolbar-tools md-toolbar-tools-estilo2">
-                    <h3>
-                      <span>Bancos y ATMs</span>
-                    </h3>
+              <div layout="row" layout-sm="column" id="markerlist_view">
+
+                <div flex=33>
+                  <md-toolbar>
+                    <div class="md-toolbar-tools md-toolbar-tools-estilo2">
+                      <h3>
+                        <span>Bancos y ATMs</span>
+                      </h3>
+                    </div>
+                  </md-toolbar>
+
+                  <md-content>
+
+                    <md-list id="markerlist" class="make-scrollable" flex>
+
+                      <md-list-item class="md-3-line" ng-repeat="marker in markerlist" ng-click="null">
+                        <div class="md-list-item-text">
+                          <h3>Nombre: {{ marker.name }}</h3>
+                          <h4>ID:{{ marker.id }}</h4>
+                          <h4>Lugar: {{ marker.vicinity }}</h4>
+                          <h4>Lat: {{ marker.geometry.location.lat() }}</h4>
+                          <h4>Lng: {{ marker.geometry.location.lng() }}</h4>
+                          <!--<p>{{ marker.descrip }}</p>-->
+                        </div>
+                        <md-divider inset></md-divider>
+                      </md-list-item>
+
+                    </md-list>
+
+                  </md-content>
+                </div>              
+              <md-divider inset></md-divider>
+                <!--Mapa-->
+                <div flex="66">
+                  <div id="map">
                   </div>
-                </md-toolbar>
-
-                <md-content flex style="overflow: scroll;">
-
-                  <md-list>
-
-                    <md-list-item class="md-3-line" ng-repeat="marker in markerlist" ng-click="null">
-                      <div class="md-list-item-text">
-                        <h3>Nombre: {{ marker.name }}</h3>
-                        <h4>ID:{{ marker.id }}</h4>
-                        <h4>Lugar: {{ marker.vicinity }}</h4>
-                        <h4>Lat: {{ marker.geometry.location.lat() }}</h4>
-                        <h4>Lng: {{ marker.geometry.location.lng() }}</h4>
-                        <!--<p>{{ marker.descrip }}</p>-->
-                      </div>
-                      <md-divider inset></md-divider>
-                    </md-list-item>
-
-                  </md-list>
-
-                </md-content>
-              </div>              
-            <md-divider inset></md-divider>
-              <!--Mapa-->
-              <div flex="66">
-                <div id="map">
                 </div>
-              </div>
-            </div> 
-              <md-content layout-gt-sm="row" layout-padding>
-                <div>
+              </div> 
+              
+
+              <div layout="row" layout-sm="column">
+                <div flex=33>
+                  <h3>Agregar Comentario</h3>
                   <md-input-container>
-                    <label>Usuario</label>
+                    <label>Nombre</label>
                     <input ng-model="comment.name">
                   </md-input-container>
 
@@ -125,18 +129,25 @@
                     <textarea ng-model="comment.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
                   </md-input-container>
                   <md-button class="md-raised md-primary" ng-click="addComentario()">Ok</md-button>
+
                 </div>
-              </md-content>
-            <md-list-item class="md-3-line" ng-repeat="comment in comments" ng-click="null">
-                      <div class="md-list-item-text">
-                        <h3>Nombre: {{ comment.name }}</h3>
-                        <h4>Comentario:{{ comment.comment }}</h4>
-                        <!--<p>{{ marker.descrip }}</p>-->
-                      </div>
-                      <md-divider inset></md-divider>
-                    </md-list-item>
-           
-            </div> 
+
+                <div flex=66>
+                  <h2>Comentarios sobre: <!--{{marker.nameElegido}}--></h2>
+                  <md-list-item class="md-3-line" ng-repeat="comment in comments">
+                    <div class="md-list-item-text">
+                      <h3>Nombre: {{ comment.name }}</h3>
+                      <h4>Comentario:{{ comment.comment }}</h4>
+                      <!--<p>{{ marker.descrip }}</p>-->
+                    </div>
+                    <md-divider inset></md-divider>
+                  </md-list-item>
+                </div>
+
+            </div>
+              
+              
+          </div>
           </md-content>
         </md-tab>
         
