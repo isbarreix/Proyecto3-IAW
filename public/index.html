@@ -108,8 +108,9 @@
               <md-divider inset></md-divider>
                 <!--Mapa-->
                 <div flex="66">
-                  <div id="map">
-                  </div>
+                  <ng-map zoom="10" center="-38.70, -62.27" >
+                    <marker ng-repeat="marker in markerlist" position="{{marker.geometry.location}}"></marker>
+                </ng-map>
                 </div>
               </div> 
               
