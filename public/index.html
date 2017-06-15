@@ -123,14 +123,19 @@
                     <label>Nombre</label>
                     <input ng-model="comment.name">
                   </md-input-container>
-
-                  <md-input-container>
-                    <label>Comentario</label>
-                    <textarea ng-model="comment.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-                  </md-input-container>
-                  <md-button class="md-raised md-primary" ng-click="addComentario()">Ok</md-button>
-
+                  <div layout="colum">
+                    <md-input-container>
+                      <label>Comentario</label>
+                      <textarea ng-model="comment.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                    </md-input-container>
+                  </div>
+                  <div layout="colum">
+                    <md-button class="md-raised md-primary" ng-click="addComentario()">Agregar</md-button>
+                  </div>
+                  
                 </div>
+                  
+
 
                 <div flex=66>
                   <h2>Comentarios sobre: <!--{{marker.nameElegido}}--></h2>
