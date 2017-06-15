@@ -12,18 +12,33 @@ app.controller('MapCtrl', ['$scope', '$http', function ($scope, $http, NgMap) {
 	var map;
 	var infowindow;
     $scope.initialize = function() {
-		var pyrmont = {lat: -33.867, lng: 151.195};
+		var bahia = {lat: -38.7167, lng: -62.2833};
 
         map = new google.maps.Map(document.getElementById('map'), {
-            center: pyrmont,
+            center: bahia,
             zoom: 15
         });
+        
+        google.maps.event.addListener(map, "click", function (event) {
+                var latitude = event.latLng.lat();
+                var longitude = event.latLng.lng();
+                console.log( latitude + ', ' + longitude );
+                var locacionActual = {lat: latitude, lng: longitude};
+            
+                var service = new google.maps.places.PlacesService(map);
+                service.nearbySearch({
+                    location: locacionActual,
+                      radius: 5000,
+                      type: ['atm']
+                    }, callback);
+                
+            }); //end addListener
 
         infowindow = new google.maps.InfoWindow();
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
-            location: pyrmont,
-              radius: 500,
+            location: bahia,
+              radius: 5000,
               type: ['atm']
             }, callback);
     }        
