@@ -51,6 +51,21 @@ app.controller('MapCtrl', ['$scope', '$http', function ($scope, $http, NgMap) {
 		});
 	}
 
- 
+    var refresh = function(){ $http.get("/comments").then(function(response){
+       console.log("data recibida");
+        $scope.comments =response.data;
+       $scope.comment = null;
+    });                             
+             }
+   refresh();
+    
+    $scope.addComentario = function(){
+        console.log("hola");
+        console.log($scope.comment);
+        $http.post("/comments", $scope.comment).then(function(response){
+            console.log(response.data);
+            refresh();
+        });
+    };
 
 }]);

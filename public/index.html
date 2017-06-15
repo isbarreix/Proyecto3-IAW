@@ -113,8 +113,23 @@
               </div>
 
               
-            </div>            
+            </div> 
           </md-content>
+            
+                <md-content layout-gt-sm="row" layout-padding>
+                <div>
+                  <md-input-container>
+                    <label>Usuario</label>
+                    <input ng-model="comment.name">
+                  </md-input-container>
+
+                  <md-input-container>
+                    <label>Comentario</label>
+                    <textarea ng-model="comment.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                  </md-input-container>
+                  <md-button class="md-raised md-primary" ng-click="addComentario()">Ok</md-button>
+                </div>
+              </md-content>
         </md-tab>
         
         
