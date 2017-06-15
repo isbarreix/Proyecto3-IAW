@@ -92,3 +92,9 @@ md-button{
   background-color:  #82B1FF;
   position: absolute;
 }
+
+#mapAdmin {
+  width: 30%; 
+  height: 57%; 
+  position: absolute;
+}

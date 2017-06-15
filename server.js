@@ -4,6 +4,7 @@ const path = require('path');
 var express = require("express");
 var mongojs = require('mongojs');
 var db = mongojs('comments', ['comments']);
+var dbMarkerApp = mongojs('markerlist', ['markerlist']);
 var bodyParser = require("body-parser");
 var app = express();
 // carpeta node_modules
@@ -12,16 +13,13 @@ app.use('/modules', express.static(__dirname + '/node_modules/'));
 
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(bodyParser.json());
-/*var mongojs = require('mongojs');
-//       1er arg: base de dats, 2do ar:
-//var db = mongojs('contactlist', ['contactlist']);
-;*/
+
 
 app.get("/comments", function (req, resp){
     console.log("I received a get");
     
     db.comments.find(function(err,docs){
-        console.log(docs);
+        //console.log(docs);
         resp.json(docs);
     })
 });
@@ -32,6 +30,14 @@ app.post("/comments", function(req,resp){
         resp.json(doc);
     })
 });
+
+
+app.get("/markerapplist", function(req, res) {
+    dbMarkerApp.markerlist.find(function (err, docs) {
+        res.json(docs);
+    });
+});
+
 
 app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);

@@ -160,6 +160,113 @@
           <md-content class="md-padding">
             <h1 class="md-display-2">Tab Three</h1>
             <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+            <div ng-controller="AdminCtrl">
+              <div layout="row" layout-sm="column" id="markerlist_view">
+				  <div flex=33>
+                    <md-content>
+					<h3>Base de datos</h3>
+                      <md-list id="markerlist" class="make-scrollable" flex>
+
+                        <md-list-item class="md-3-line" ng-repeat="marker in markerApplist" ng-click="null">
+                          <div class="md-list-item-text">
+                            <h3>Nombre: {{ marker.name }}</h3>
+                            <h4>ID:{{ marker.id }}</h4>
+                            <h4>Lugar: {{ marker.vicinity }}</h4>
+                            <h4>Lat: {{ marker.lat }}</h4>
+                            <h4>Lng: {{ marker.lng }}</h4>
+                            <!--<p>{{ marker.descrip }}</p>-->
+                          </div>
+                          <md-divider inset></md-divider>
+                        </md-list-item>
+
+                      </md-list>
+
+                    </md-content>
+				</div>  
+                  <div flex=33>
+                    <md-content>
+				      <h3>Servicio Google</h3>
+                      <md-list id="markerlist" class="make-scrollable" flex>
+
+                        <md-list-item class="md-3-line" ng-repeat="marker in markerGooglelist" ng-click="null">
+                          <div class="md-list-item-text">
+                            <h3>Nombre: {{ marker.name }}</h3>
+                            <h4>ID:{{ marker.id }}</h4>
+                            <h4>Lugar: {{ marker.vicinity }}</h4>
+                            <h4>Lat: {{ marker.geometry.location.lat() }}</h4>
+                            <h4>Lng: {{ marker.geometry.location.lng() }}</h4>
+                            <!--<p>{{ marker.descrip }}</p>-->
+                          </div>
+                          <md-divider inset></md-divider>
+                        </md-list-item>
+
+                      </md-list>
+
+                    </md-content>
+				</div>  
+					  
+				<div flex="33">
+				  <h3>Mapa</h3>
+                  <div id="mapAdmin">
+                  </div>
+                </div> 					  				  
+              </div>
+          
+              <div layout="row" layout-sm="column">
+                <div flex>
+                  <table data-md-table>
+                    <tr md-row>
+                    </tr>
+                    <thead md-head>
+                      <tr md-row>
+                        <th md-column>&nbsp;</th>
+                        <th md-column>&nbsp;</th>
+                        <th md-column>&nbsp;</th>
+                        <th md-column>Action</th>
+                        <th md-column>&nbsp;</th><!--espacio en blanco-->
+                      </tr>
+                    </thead>
+                    <tbody md-body>
+                      <form name="userForm" novalidate>
+
+                        <tr md-row>
+                          <td md-cell>
+                              <md-input-container class="md-block" flex-gt-xs>
+                                   <label>Nombre</label>
+                                   <input name="name" class="form-control" ng-model="marker.name">
+                              </md-input-container>
+                          </td>
+                          <td md-cell>
+                              <md-input-container class="md-block" flex-gt-xs>
+                                   <label>Locación</label>
+                                   <input name="email" class="form-control" ng-model="marker.name" >
+                              </md-input-container>
+                          </td>
+                          <td md-cell>
+                              <md-input-container class="md-block" flex-gt-xs>
+                                   <label>Latitud</label>
+                                   <input name="pass" class="form-control" type="password">
+                              </md-input-container>
+                          </td>
+                          <td md-cell>
+                              <md-input-container class="md-block" flex-gt-xs>
+                                   <label>Latitud</label>
+                                   <input name="pass" class="form-control" type="password">
+                              </md-input-container>
+                          </td>
+                          <td md-cell><md-button class="md-raised md-primary" ng-click="null">Agregar locacion</md-button></td>
+                          <td md-cell><md-button class="md-raised" ng-click="null">Actualizar</md-button></td>&nbsp;&nbsp;
+                          <td md-cell><md-button class="md-raised" ng-click="null">Limpiar</md-button></td> 
+                        </tr>
+                      </form>                        
+                    </tbody>
+                  </table>
+                  
+                </div>            
+              </div>
+              
+            </div>
+            
           </md-content>
         </md-tab>
       </md-tabs>
