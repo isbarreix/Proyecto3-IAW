@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Stylesheet angular Material-->
     <link rel="stylesheet" href="/modules/angular-material/angular-material.min.css">
-    <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">-->
     <!-- Stylesheet propia-->
     <link rel="stylesheet" href="../assets/css/app_estilo.css">
 
@@ -79,19 +78,18 @@
               <div layout="row" layout-sm="column" id="markerlist_view">
 
                 <div flex=33>
-                  <md-toolbar>
+
                     <div class="md-toolbar-tools md-toolbar-tools-estilo2">
-                      <h3>
-                        <span>Bancos y ATMs</span>
-                      </h3>
+                      <md-input-container id="searchFilter">
+                        <input placeholder="Buscar banco" ng-model="filter.$">
+                      </md-input-container>
                     </div>
-                  </md-toolbar>
 
                   <md-content>
 
                     <md-list id="markerlist" class="make-scrollable" flex>
 
-                      <md-list-item class="md-3-line" ng-repeat="marker in markerlist" ng-click="null">
+                      <md-list-item class="md-3-line" ng-repeat="marker in markerlist |  orderBy:'name' | filter:filter" ng-click="null">
                         <div class="md-list-item-text">
                           <h3>Nombre: {{ marker.name }}</h3>
                           <h4>ID:{{ marker.id }}</h4>

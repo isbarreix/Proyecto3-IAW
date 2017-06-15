@@ -12,6 +12,7 @@ html {
   background-size: 100% 260px;
   background-position: 0 0;
   background-image: linear-gradient(rgb(50,177,212), rgb(50,177,212));
+  /*background-image: linear-gradient(rgb(0,110,212), rgb(0,110,212));*/
 }
 
 body {
@@ -65,22 +66,29 @@ md-button{
   margin-bottom: 0; 
 }
 
+.md-toolbar-tools, .md-toolbar-tools-estilo2 {
 
-.md-toolbar-tools-estilo2{
+}
+.md-toolbar-tools-estilo2 {
   background-color:  #82B1FF;
-  color:  #FFFFFF;
 }
 
-#map{
+#map {
   width: 65%; 
   height: 57%; 
   position: absolute;
 }
 
-#markerlist{
+#markerlist {
   height:600px;
 }
 
-#markerlist_view{
+#markerlist_view {
   /*height: 25%;*/
+}
+
+#searchFilter {
+  font-size: 100%;
+  background-color:  #82B1FF;
+  position: absolute;
 }
