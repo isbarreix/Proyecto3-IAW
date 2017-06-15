@@ -8,6 +8,10 @@
 
 html {
   background: #eee;
+  background-repeat: no-repeat;
+  background-size: 100% 260px;
+  background-position: 0 0;
+  background-image: linear-gradient(rgb(50,177,212), rgb(50,177,212));
 }
 
 body {
@@ -60,6 +64,7 @@ md-button{
   margin-top: 10px;
   margin-bottom: 0; 
 }
+
 
 .md-toolbar-tools-estilo2{
   background-color:  #82B1FF;
