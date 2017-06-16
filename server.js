@@ -152,9 +152,27 @@ apiRoutes.get('/', function(req, res) {
 });
 
 apiRoutes.post('/markerapplist', function(req, res) {
-	dbMarkerApp.markerlist.insert(req.body.marker, function(err, docs) {
+    //se crea el modelo marker
+    //falta validar
+    var marker = new Marker({ 
+		name: req.body.marker.name,
+        vicinity: req.body.marker.vicinity,
+        lat: req.body.marker.lat,
+        lng: req.body.marker.lng,
+        description: "TBD"
+	});
+    
+	marker.save(function(err) {
+		if (err) throw err;
+
+		console.log('Marker saved successfully');
+		res.json({ success: true });
+	});
+    
+	/*dbMarkerApp.markerlist.insert(req.body.marker, function(err, docs) {
        res.json(docs); 
     });
+    */
 });
 
 apiRoutes.get('/check', function(req, res) {
@@ -189,7 +207,8 @@ app.post("/comments", function(req,resp){
 
 //	get listMaker
 app.get("/markerapplist", function(req, res) {
-    dbMarkerApp.markerlist.find(function (err, docs) {
+    
+    Marker.find(function (err, docs) {
         res.json(docs);
     });
 });
