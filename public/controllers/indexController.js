@@ -1,6 +1,6 @@
 var app = angular.module('AppMaps', ['ngMaterial', 'ngMap']);
 
-var token; 
+var token, registrado;
 app.controller("TabOneCtrl", function($scope) {
 	$scope.title = "Count Upwards";
 
@@ -119,7 +119,17 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 		$scope.marker_g.lng = marker.geometry.location.lng();
     };
 	
-	
+	$scope.registrado = function(){
+      return registrado;
+    }
+    
+    $scope.loginAdmin = function(){
+        $http.post("/api/login", $scope.admin).then(function(response){
+            console.log(response.data.token);
+            token = response.data.token;
+            registrado = true;
+        });
+    }
 	
 }]);
 /*
@@ -137,9 +147,9 @@ app.controller("LoginController",['$scope','$http', function($scope,$http) {
     
     $scope.loginAdmin = function(){
         $http.post("/api/login", $scope.admin).then(function(response){
-            console.log(response.data);
-            token=response.data.token;
-            console.log(token);
+            console.log(response.data.token);
+            token = response.data.token;
+            registrado = true;
         });
     }
 }]);

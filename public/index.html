@@ -163,10 +163,33 @@
         
         <!--Page 3 About-->
         <md-tab label="About">
-          <md-content class="md-padding">
+          <div ng-controller="AdminCtrl">
+          
+            <md-content class="md-padding" ng-hide="registrado()">
+              <!--CONTENIDO PAGE Login  -->
+              <div>
+              <form name="login">
+                  <div layout="row" layout-xs="column" layout-sm="column" layout-align="space-between center">
+                    <div flex-gt-sm="80">
+                        <md-input-container class="md-block" flex-gt-sm>
+                             <label>User</label>
+                            <input name="User" class="form-control" ng-model="admin.username">
+                        </md-input-container>
+                         <md-input-container class="md-block" flex-gt-sm>
+                             <label>Password</label>
+                            <input name="pass" class="form-control" type="password" ng-model="admin.password">
+                        </md-input-container>
+                        <md-button class="md-raised md-primary" ng-click="loginAdmin()">Log In</md-button>
+                      </div>
+                  </div>
+                          
+              </form>
+              </div>
+          </md-content>
+          <md-content class="md-padding" ng-show="registrado()">
             <h1 class="md-display-2">Tab Three</h1>
             <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-            <div ng-controller="AdminCtrl">
+            <div>
               <div layout="row" layout-sm="column" id="markerlist_view">
 				  <div flex=33>
                     <md-content>
@@ -322,30 +345,11 @@
             </div>
             
           </md-content>
+          </div>
         </md-tab>
         <md-tab label="Login">
           
-          <md-content class="md-padding">
-              <!--CONTENIDO PAGE Login  -->
-              <div ng-controller="LoginController">
-              <form name="login">
-                  <div layout="row" layout-xs="column" layout-sm="column" layout-align="space-between center">
-                    <div flex-gt-sm="80">
-                        <md-input-container class="md-block" flex-gt-sm>
-                             <label>User</label>
-                            <input name="User" class="form-control" ng-model="admin.username">
-                        </md-input-container>
-                         <md-input-container class="md-block" flex-gt-sm>
-                             <label>Password</label>
-                            <input name="pass" class="form-control" type="password" ng-model="admin.password">
-                        </md-input-container>
-                        <md-button class="md-raised md-primary" ng-click="loginAdmin()">Log In</md-button>
-                      </div>
-                  </div>
-                          
-              </form>
-              </div>
-          </md-content>
+
         </md-tab>
       </md-tabs>
      

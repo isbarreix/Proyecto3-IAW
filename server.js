@@ -72,8 +72,6 @@ var apiRoutes = express.Router();
 // ---------------------------------------------------------
 // http://localhost:8080/api/authenticate
 apiRoutes.post('/login', function(req, res) {
-
-    console.log("sdasd");
 	// find the user
 	Admin.findOne({
 		name: req.body.username
