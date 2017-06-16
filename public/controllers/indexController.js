@@ -7,12 +7,16 @@ app.controller("TabOneCtrl", function($scope) {
 
 //	Documentacion api
 
-app.controller('MapCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http, NgMap) {
+
+app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($scope, $http, $location, NgMap) {
+    
+    $scope.fbhref=$location.absUrl();
+    
     NgMap.getMap().then(function(map) {
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
             location: map.getCenter(),
-              radius: 5000,
+              radius: 10000,
               type: ['atm']
             }, callback);
         
@@ -122,4 +126,16 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 		});
 	}
 
+<<<<<<< HEAD
 ;*/
+
+
+app.controller("LoginController",['$scope','$http', function($scope,$http) {
+    
+    $scope.loginAdmin = function(){
+        $http.post("/login", $scope.admin).then(function(response){
+            console.log(response.data);
+        });
+    }
+}]);
+
