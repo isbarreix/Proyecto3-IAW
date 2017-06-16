@@ -168,14 +168,14 @@
                     <md-content>
 					<h3>Base de datos</h3>
                       <md-list id="markerlist" class="make-scrollable" flex>
-
-                        <md-list-item class="md-3-line" ng-repeat="marker in markerApplist" ng-click="null">
+						  
+                        <md-list-item class="md-3-line" ng-repeat="marker_app in markerApplist" ng-click="editAppMarker(marker_app._id)">
                           <div class="md-list-item-text">
-                            <h3>Nombre: {{ marker.name }}</h3>
-                            <h4>ID:{{ marker.id }}</h4>
-                            <h4>Lugar: {{ marker.vicinity }}</h4>
-                            <h4>Lat: {{ marker.lat }}</h4>
-                            <h4>Lng: {{ marker.lng }}</h4>
+                            <h3>Nombre: {{ marker_app.name }}</h3>
+                            <h4>ID:{{ marker_app._id }}</h4>
+                            <h4>Lugar: {{ marker_app.vicinity }}</h4>
+                            <h4>Lat: {{ marker_app.lat }}</h4>
+                            <h4>Lng: {{ marker_app.lng }}</h4>
                             <!--<p>{{ marker.descrip }}</p>-->
                           </div>
                           <md-divider inset></md-divider>
@@ -190,13 +190,13 @@
 				      <h3>Servicio Google</h3>
                       <md-list id="markerlist" class="make-scrollable" flex>
 
-                        <md-list-item class="md-3-line" ng-repeat="marker in markerGooglelist" ng-click="null">
+                        <md-list-item class="md-3-line" ng-repeat="marker_g in markerGooglelist" ng-click="editGoogleMarker(marker_g)">
                           <div class="md-list-item-text">
-                            <h3>Nombre: {{ marker.name }}</h3>
-                            <h4>ID:{{ marker.id }}</h4>
-                            <h4>Lugar: {{ marker.vicinity }}</h4>
-                            <h4>Lat: {{ marker.geometry.location.lat() }}</h4>
-                            <h4>Lng: {{ marker.geometry.location.lng() }}</h4>
+                            <h3>Nombre: {{ marker_g.name }}</h3>
+                            <h4>ID:{{ marker_g.id }}</h4>
+                            <h4>Lugar: {{ marker_g.vicinity }}</h4>
+                            <h4>Lat: {{ marker_g.geometry.location.lat() }}</h4>
+                            <h4>Lng: {{ marker_g.geometry.location.lng() }}</h4>
                             <!--<p>{{ marker.descrip }}</p>-->
                           </div>
                           <md-divider inset></md-divider>
@@ -207,12 +207,15 @@
                     </md-content>
 				</div>  
 					  
-				<div flex="33">
-				  <h3>Mapa</h3>
-                  <div id="mapAdmin">
-                  </div>
-                </div> 					  				  
-              </div>
+				<!--Mapa-->
+
+                <div flex="66" class="map-container">
+                  <ng-map zoom="10" center="-38.70, -62.27" id="mapAdmin">
+					<marker ng-repeat="marker_app in markerApplist" position="{{ marker_app.lat }}, {{ marker_app.lng }}" icon="../img/marker.png" on-click="editAppMarker(marker_app._id)"></marker>
+                    <marker ng-repeat="marker_g in markerGooglelist" position="{{ marker_g.geometry.location.lat() }}, {{ marker_g.geometry.location.lng() }}"></marker>
+                  </ng-map>
+                </div>
+              </div> 
           
               <div layout="row" layout-sm="column">
                 <div flex>
@@ -221,6 +224,7 @@
                     </tr>
                     <thead md-head>
                       <tr md-row>
+                        <th md-column>Editar desde la base de datos</th>
                         <th md-column>&nbsp;</th>
                         <th md-column>&nbsp;</th>
                         <th md-column>&nbsp;</th>
@@ -229,39 +233,83 @@
                       </tr>
                     </thead>
                     <tbody md-body>
-                      <form name="userForm" novalidate>
-
+						
+                      <form name="markerAppForm">
                         <tr md-row>
                           <td md-cell>
-                              <md-input-container class="md-block" flex-gt-xs>
-                                   <label>Nombre</label>
-                                   <input name="name" class="form-control" ng-model="marker.name">
+                              <md-input-container class="md-block" flex>
+                                   <label>Título</label>
+                                   <input name="name" class="form-control" ng-model="marker_app.name" ng-required="true">
                               </md-input-container>
                           </td>
                           <td md-cell>
-                              <md-input-container class="md-block" flex-gt-xs>
+                              <md-input-container class="md-block" flex>
                                    <label>Locación</label>
-                                   <input name="email" class="form-control" ng-model="marker.name" >
+                                   <input name="email" class="form-control" ng-model="marker_app.vicinity" ng-required="true">
                               </md-input-container>
                           </td>
                           <td md-cell>
-                              <md-input-container class="md-block" flex-gt-xs>
+                              <md-input-container class="md-block" flex>
                                    <label>Latitud</label>
-                                   <input name="pass" class="form-control" type="password">
+                                   <input name="pass" class="form-control" ng-model="marker_app.lat" ng-required="true">
                               </md-input-container>
                           </td>
                           <td md-cell>
-                              <md-input-container class="md-block" flex-gt-xs>
+                              <md-input-container class="md-block" flex>
                                    <label>Latitud</label>
-                                   <input name="pass" class="form-control" type="password">
+                                   <input name="pass" class="form-control" ng-model="marker_app.lng" ng-required="true">
                               </md-input-container>
                           </td>
-                          <td md-cell><md-button class="md-raised md-primary" ng-click="null">Agregar locacion</md-button></td>
-                          <td md-cell><md-button class="md-raised" ng-click="null">Actualizar</md-button></td>&nbsp;&nbsp;
-                          <td md-cell><md-button class="md-raised" ng-click="null">Limpiar</md-button></td> 
+                          <td md-cell><md-button class="md-raised md-primary" ng-click="addMarkerApp()">Agregar marcador</md-button></td>
+                          <td md-cell><md-button class="md-raised" ng-click="null" ng-disabled="true">Actualizar</md-button></td>&nbsp;&nbsp;
+                          <td md-cell><md-button class="md-raised" ng-click="deselectMaker_app()">Limpiar</md-button></td> 
                         </tr>
                       </form>                        
                     </tbody>
+					<thead md-head>
+                      <tr md-row>
+                        <th md-column>Agregar desde Google Places</th>
+                        <th md-column>&nbsp;</th>
+                        <th md-column>&nbsp;</th>
+                        <th md-column>&nbsp;</th>
+                        <th md-column>Action</th>
+                        <th md-column>&nbsp;</th><!--espacio en blanco-->
+                      </tr>
+                    </thead>
+                    <tbody md-body>
+						
+                      <form name="markerGoogleForm">
+                        <tr md-row>
+                          <td md-cell>
+                              <md-input-container class="md-block" flex>
+                                   <label>Título</label>
+                                   <input name="name" class="form-control" ng-model="marker_g.name" ng-required="true">
+                              </md-input-container>
+                          </td>
+                          <td md-cell>
+                              <md-input-container class="md-block" flex>
+                                   <label>Locación</label>
+                                   <input name="email" class="form-control" ng-model="marker_g.vicinity" ng-required="true">
+                              </md-input-container>
+                          </td>
+                          <td md-cell>
+                              <md-input-container class="md-block" flex>
+                                   <label>Latitud</label>
+                                   <input name="pass" class="form-control"  ng-model="marker_g.lat" ng-required="true">
+                              </md-input-container>
+                          </td>
+                          <td md-cell>
+                              <md-input-container class="md-block" flex>
+                                   <label>Latitud</label>
+                                   <input name="pass" class="form-control" ng-model="marker_g.lng" ng-required="true">
+                              </md-input-container>
+                          </td>
+                          <td md-cell><md-button class="md-raised md-primary" ng-click="addMarkerG()">Agregar marcador</md-button></td>
+                          <td md-cell><md-button class="md-raised" ng-click="deselectMaker_g()">Limpiar</md-button></td> 
+                        </tr>
+                      </form>                        
+                    </tbody> 
+					  
                   </table>
                   
                 </div>            

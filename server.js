@@ -31,10 +31,26 @@ app.post("/comments", function(req,resp){
     })
 });
 
-
+//	get listMaker
 app.get("/markerapplist", function(req, res) {
     dbMarkerApp.markerlist.find(function (err, docs) {
         res.json(docs);
+    });
+});
+
+//	get Marker
+app.get('/markerapplist/:id', function(req, res) {
+    var id = req.params.id;
+    dbMarkerApp.markerlist.findOne({_id: mongojs.ObjectId(id)}, function(err, docs) {
+       res.json(docs); 
+    });
+});
+
+//	post Maker
+
+app.post('/markerapplist', function(req, res) { 
+    dbMarkerApp.markerlist.insert(req.body, function(err, docs) {
+       res.json(docs); 
     });
 });
 
