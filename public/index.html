@@ -106,17 +106,18 @@
                   </md-content>
                 </div>              
               <md-divider inset></md-divider>
+                
                 <!--Mapa-->
-                <div flex="66">
-                  <ng-map zoom="10" center="-38.70, -62.27" >
-                    <marker ng-repeat="marker in markerlist" position="{{marker.geometry.location}}"></marker>
-                </ng-map>
+                <div flex="66" class="map-container">
+                  <ng-map zoom="10" center="-38.70, -62.27" id="map">
+                    <marker ng-repeat="marker in markerlist" position="{{ marker.geometry.location.lat() }}, {{ marker.geometry.location.lng() }}"></marker>
+                  </ng-map>
                 </div>
               </div> 
               
 
-              <div layout="row" layout-sm="column">
-                <div flex=33>
+              <div layout="row">
+                <div flex=33 layout="column">
                   <h3>Agregar Comentario</h3>
                   <md-input-container>
                     <label>Nombre</label>
@@ -136,7 +137,7 @@
                   
 
 
-                <div flex=66>
+                <div flex=66 layout="column">
                   <h2>Comentarios sobre: <!--{{marker.nameElegido}}--></h2>
                   <md-list-item class="md-3-line" ng-repeat="comment in comments">
                     <div class="md-list-item-text">

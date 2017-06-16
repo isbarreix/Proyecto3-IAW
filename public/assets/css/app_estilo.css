@@ -73,10 +73,9 @@ md-button{
   background-color:  #82B1FF;
 }
 
+
 #map {
-  width: 65%; 
-  height: 57%; 
-  position: absolute;
+ height: 665px;
 }
 
 #markerlist {
