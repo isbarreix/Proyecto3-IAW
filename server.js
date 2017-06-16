@@ -1,8 +1,13 @@
 const hostname = '127.0.0.1';
 const port = 3000;
 const path = require('path');
+
+
 var express = require("express");
 var mongojs = require('mongojs');
+var mongoose = require('mongoose');
+var md5 = require("md5");
+
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var config = require('./config'); // get our config file
 
@@ -11,6 +16,13 @@ var db = mongojs('comments', ['comments']);
 var dbMarkerApp = mongojs('markerlist', ['markerlist']);
 var bodyParser = require("body-parser");
 var app = express();
+
+
+var Admin= require("./public/models/admin.js");
+var Marker= require("./public/models/marker.js");
+var Comment= require("./public/models/comment.js");
+
+
 // carpeta node_modules
 app.use('/modules', express.static(__dirname + '/node_modules/'));
 
@@ -21,13 +33,31 @@ app.use(bodyParser.json());
 // =================================================================
 // configuration ===================================================
 // =================================================================
+
+mongoose.connect(config.database);
 app.set('superSecret', config.secret); // secret variable
+
 
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // use morgan to log requests to the console
 //app.use(morgan('dev'));
+
+app.get('/setup', function(req, res) {
+
+	// create a sample user
+	var nick = new Admin({ 
+		name: 'admin', 
+		password: md5('admin'), 
+	});
+	nick.save(function(err) {
+		if (err) throw err;
+
+		console.log('User saved successfully');
+		res.json({ success: true });
+	});
+});
 
 // =================================================================
 // routes ==========================================================
@@ -41,27 +71,28 @@ var apiRoutes = express.Router();
 // authentication (no middleware necessary since this isnt authenticated)
 // ---------------------------------------------------------
 // http://localhost:8080/api/authenticate
-apiRoutes.post('/authenticate', function(req, res) {
+apiRoutes.post('/login', function(req, res) {
 
+    console.log("sdasd");
 	// find the user
 	Admin.findOne({
-		name: req.body.name
-	}, function(err, user) {
+		name: req.body.username
+	}, function(err, admin) {
 
 		if (err) throw err;
 
-		if (!user) {
+		if (!admin) {
 			res.json({ success: false, message: 'Authentication failed. User not found.' });
-		} else if (user) {
+		} else if (admin) {
 
 			// check if password matches
-			if (user.password != req.body.password) {
+			if (admin.password != md5(req.body.password)) {
 				res.json({ success: false, message: 'Authentication failed. Wrong password.' });
 			} else {
 
 				// if user is found and password is right
 				// create a token
-				var token = jwt.sign(user, app.get('superSecret'), {
+				var token = jwt.sign(admin, app.get('superSecret'), {
 					expiresIn: 86400 // expires in 24 hours
 				});
 
@@ -81,9 +112,10 @@ apiRoutes.post('/authenticate', function(req, res) {
 // route middleware to authenticate and check token
 // ---------------------------------------------------------
 apiRoutes.use(function(req, res, next) {
-
+    console.log(req.body);
+    
 	// check header or url parameters or post parameters for token
-	var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+	var token = req.body.token || req.headers['x-access-token'];
 
 	// decode token
 	if (token) {
@@ -119,10 +151,10 @@ apiRoutes.get('/', function(req, res) {
 	res.json({ message: 'Welcome to the coolest API on earth!' });
 });
 
-apiRoutes.get('/users', function(req, res) {
-	User.find({}, function(err, users) {
-		res.json(users);
-	});
+apiRoutes.post('/markerapplist', function(req, res) {
+	dbMarkerApp.markerlist.insert(req.body.marker, function(err, docs) {
+       res.json(docs); 
+    });
 });
 
 apiRoutes.get('/check', function(req, res) {
@@ -167,14 +199,6 @@ app.get("/markerapplist", function(req, res) {
 app.get('/markerapplist/:id', function(req, res) {
     var id = req.params.id;
     dbMarkerApp.markerlist.findOne({_id: mongojs.ObjectId(id)}, function(err, docs) {
-       res.json(docs); 
-    });
-});
-
-//	post Maker
-
-app.post('/markerapplist', function(req, res) { 
-    dbMarkerApp.markerlist.insert(req.body, function(err, docs) {
        res.json(docs); 
     });
 });

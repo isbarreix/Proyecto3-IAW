@@ -1,5 +1,6 @@
 var app = angular.module('AppMaps', ['ngMaterial', 'ngMap']);
 
+var token; 
 app.controller("TabOneCtrl", function($scope) {
 	$scope.title = "Count Upwards";
 
@@ -89,7 +90,9 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 	}
 	
 	function addMarker(marker){
-		$http.post('/markerapplist', marker).then(function(response) {
+        var request = {marker: marker, token: token}
+        console.log(request);
+		$http.post('/api/markerapplist', request).then(function(response) {
         	console.log(response);
 			getMarcadores();
         });
@@ -133,8 +136,10 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 app.controller("LoginController",['$scope','$http', function($scope,$http) {
     
     $scope.loginAdmin = function(){
-        $http.post("/login", $scope.admin).then(function(response){
+        $http.post("/api/login", $scope.admin).then(function(response){
             console.log(response.data);
+            token=response.data.token;
+            console.log(token);
         });
     }
 }]);
