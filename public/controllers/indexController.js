@@ -7,12 +7,15 @@ app.controller("TabOneCtrl", function($scope) {
 
 //	Documentacion api
 
-app.controller('MapCtrl', ['$scope', '$http','NgMap', function ($scope, $http, NgMap) {
+app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($scope, $http,$location, NgMap) {
+    
+    $scope.fbhref=$location.absUrl();
+    
     NgMap.getMap().then(function(map) {
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
             location: map.getCenter(),
-              radius: 5000,
+              radius: 10000,
               type: ['atm']
             }, callback);
         
