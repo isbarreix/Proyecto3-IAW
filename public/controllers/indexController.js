@@ -119,3 +119,12 @@ var vm = this;
 	}
 
 }]);
+
+app.controller("LoginController",['$scope','$http', function($scope,$http) {
+    
+    $scope.loginAdmin = function(){
+        $http.post("/login", $scope.admin).then(function(response){
+            console.log(response.data);
+        });
+    }
+}]);
