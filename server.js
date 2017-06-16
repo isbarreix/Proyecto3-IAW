@@ -192,7 +192,7 @@ app.use('/api', apiRoutes);
 app.get("/comments", function (req, resp){
     console.log("I received a get");
     
-    db.comments.find(function(err,docs){
+    Comment.find(function(err,docs){
         //console.log(docs);
         resp.json(docs);
     })
@@ -200,7 +200,11 @@ app.get("/comments", function (req, resp){
 
 app.post("/comments", function(req,resp){
     console.log(req.body);
-    db.comments.insert(req.body, function(err,doc){
+    var comentario = new Comment({
+        name: req.body.name,
+        comment: req.body.comment
+    })
+    comentario.save(function(err,doc){
         resp.json(doc);
     })
 });
@@ -217,7 +221,7 @@ app.get("/markerapplist", function(req, res) {
 //	get Marker
 app.get('/markerapplist/:id', function(req, res) {
     var id = req.params.id;
-    dbMarkerApp.markerlist.findOne({_id: mongojs.ObjectId(id)}, function(err, docs) {
+    Marker.findOne({_id: mongojs.ObjectId(id)}, function(err, docs) {
        res.json(docs); 
     });
 });
