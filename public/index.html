@@ -161,8 +161,8 @@
         </md-tab>
         
         
-        <!--Page 3 About-->
-        <md-tab label="About">
+        <!--Page 3 Admin-->
+        <md-tab label="Admin">
           <div ng-controller="AdminCtrl">
           
             <md-content class="md-padding" ng-hide="registrado()">
@@ -186,7 +186,7 @@
               </form>
               </div>
           </md-content>
-          <md-content class="md-padding" ng-show="registrado()">
+          <md-content class="md-padding" ng-style="{'visibility': registrado() ? 'visible':'hidden'}">
             <h1 class="md-display-2">Tab Three</h1>
             <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
             <div>
@@ -237,7 +237,7 @@
 				<!--Mapa-->
 
                 <div flex="66" class="map-container">
-                  <ng-map zoom="10" center="-38.70, -62.27" id="mapAdmin">
+                  <ng-map zoom="10" center="-38.70, -62.27" id="mapAdmin" on-click="click(event)">
 					<marker ng-repeat="marker_app in markerApplist" position="{{ marker_app.lat }}, {{ marker_app.lng }}" icon="../img/marker.png" on-click="editAppMarker(marker_app._id)"></marker>
                     <marker ng-repeat="marker_g in markerGooglelist" position="{{ marker_g.geometry.location.lat() }}, {{ marker_g.geometry.location.lng() }}"></marker>
                   </ng-map>

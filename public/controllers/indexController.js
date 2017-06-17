@@ -25,6 +25,7 @@ app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($sc
             if (status === google.maps.places.PlacesServiceStatus.OK) {
                 //$scope.positions = results;
                 $scope.markerlist = results;
+                console.log(results);
             }
         }
       });
@@ -50,23 +51,31 @@ app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($sc
 
 
 app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http, NgMap) {
-	NgMap.getMap().then(function(map) {
+    
+    function buscarMarcadores(event){
+        
+        NgMap.getMap().then(function(map) {
 		var service = new google.maps.places.PlacesService(map);
+        if(event){
+            map.setCenter(event.latLng);
+        }
 		service.nearbySearch({
 			location: map.getCenter(),
 			  radius: 5000,
 			  type: ['atm']
 			}, callback);
 
-		getMarcadores();
-
 		function callback(results, status) {
 			if (status === google.maps.places.PlacesServiceStatus.OK) {
 				$scope.markerGooglelist = results;
 			}
 		}
-  });
+        });
+    }
 	
+    buscarMarcadores();
+    getMarcadores();
+    
 	function getMarcadores(){
 			$http.get('/markerApplist').then(function(response) {
 				//	console.log(response.data);
@@ -130,6 +139,10 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
             registrado = true;
         });
     }
+    
+    $scope.click = function(event){
+        buscarMarcadores(event);
+    }
 	
 }]);
 /*
@@ -138,6 +151,7 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 			infowindow.open(map, this);
 		});
 	}
+    
 
 <<<<<<< HEAD
 ;*/
