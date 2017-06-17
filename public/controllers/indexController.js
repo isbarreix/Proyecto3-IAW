@@ -170,7 +170,7 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
     */
 	$scope.removeMarker = function(id) {
 		var request = { marker: $scope.marker_app, token: token  };
-		$http.delete('/api/markerapplist/'+id, request).then(function(response) {
+		$http.post('/api/markerapplist/'+id, request).then(function(response) {
         	//console.log(response);
 			getMarcadores();
         });

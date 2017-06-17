@@ -110,7 +110,7 @@ apiRoutes.post('/login', function(req, res) {
 // route middleware to authenticate and check token
 // ---------------------------------------------------------
 apiRoutes.use(function(req, res, next) {
-    //console.log(req.body);
+    console.log(req.body);
     
 	// check header or url parameters or post parameters for token
 	var token = req.body.token || req.headers['x-access-token'];
@@ -200,16 +200,14 @@ apiRoutes.put('/markerapplist/:id', function(req, res) {
 /*
 	Elimina un marcador de la bd
 */
-apiRoutes.delete('/markerapplist/:id', function(req, res) {
-	console.log("HOLAQQQQQQQQQQQQ"+id);
-	/*var id = req.params.id;
+apiRoutes.post('/markerapplist/:id', function(req, res) {
+	var id = req.params.id;
 	Marker.findByIdAndRemove(id, function(err, marker) {
 		if (err) throw err;
 
 		//console.log('Marker saved successfully');
 		res.json({ success: true });
 	});
-*/
 });
 
 apiRoutes.get('/check', function(req, res) {
