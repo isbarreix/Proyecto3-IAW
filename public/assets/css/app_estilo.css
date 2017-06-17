@@ -94,7 +94,14 @@ md-button{
 
 #mapAdmin {
   width: 30%; 
-  height: 57%; 
+  height: 55%; 
   position: absolute;
 }
 
+.form-control-estilo2 {
+  font-size: 55%;
+}
+
+table thead tr th {
+  padding-bottom: 20px;
+}

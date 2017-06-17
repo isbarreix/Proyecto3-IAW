@@ -266,6 +266,7 @@
                         <th md-column>&nbsp;</th>
                         <th md-column>&nbsp;</th>
                         <th md-column>&nbsp;</th>
+                        <th md-column>&nbsp;</th>
                         <th md-column>Action</th>
                         <th md-column>&nbsp;</th><!--espacio en blanco-->
                       </tr>
@@ -277,25 +278,31 @@
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Título</label>
-                              <textarea name="f_mrkr_app_name" class="form-control" ng-model="marker_app.name" ng-required="true"></textarea>
+                              <textarea name="f_mrkr_app_name" class="form-control form-control-estilo2" ng-model="marker_app.name" ng-required="true"></textarea>
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Locación</label>
-                              <textarea name="f_mrkr_app_vic" class="form-control" ng-model="marker_app.vicinity" ng-required="true"></textarea>
+                              <textarea name="f_mrkr_app_vic" class="form-control form-control-estilo2" ng-model="marker_app.vicinity" ng-required="true"></textarea>
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
+                              <label>Descripción</label>
+                              <textarea name="f_mkr_g_desc" class="form-control form-control-estilo2"></textarea>
+                            </md-input-container>
+                          </td>         
+                          <td md-cell>                          
+                            <md-input-container class="md-block" flex>
                               <label>Latitud</label>
-                              <input name="f_mrkr_app_lat" class="form-control" ng-model="marker_app.lat" ng-required="true">
+                              <input name="f_mrkr_app_lat" class="form-control form-control-estilo2" ng-model="marker_app.lat" ng-required="true">
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Latitud</label>
-                              <input name="f_mrkr_app_lng" class="form-control" ng-model="marker_app.lng" ng-required="true">
+                              <label>Longitud</label>
+                              <input name="f_mrkr_app_lng" class="form-control form-control-estilo2" ng-model="marker_app.lng" ng-required="true">
                             </md-input-container>
                           </td>
                           <td md-cell><md-button class="md-raised md-primary" ng-click="addMarkerApp()">Agregar marcador</md-button></td>
@@ -310,6 +317,7 @@
                         <th md-column>&nbsp;</th>
                         <th md-column>&nbsp;</th>
                         <th md-column>&nbsp;</th>
+                        <th md-column>&nbsp;</th>
                         <th md-column>Action</th>
                         <th md-column>&nbsp;</th><!--espacio en blanco-->
                       </tr>
@@ -321,25 +329,31 @@
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Título</label>
-                              <textarea name="f_mrkr_g_name" class="form-control" ng-model="marker_g.name" ng-required="true"></textarea>
+                              <textarea name="f_mrkr_g_name" class="form-control form-control-estilo2" ng-model="marker_g.name" ng-required="true"></textarea>
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Locación</label>
-                              <textarea name="f_mkr_g_vic" class="form-control" ng-model="marker_g.vicinity" ng-required="true"></textarea>
+                              <textarea name="f_mkr_g_vic" class="form-control form-control-estilo2" ng-model="marker_g.vicinity" ng-required="true"></textarea>
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
+                              <label>Descripción</label>
+                              <textarea name="f_mkr_g_desc" class="form-control form-control-estilo2"></textarea>
+                            </md-input-container>
+                          </td>                          
+                          <td md-cell>
+                            <md-input-container class="md-block" flex>
                               <label>Latitud</label>
-                              <input name="f_mkr_g_lat" class="form-control"  ng-model="marker_g.lat" ng-required="true">
+                              <input name="f_mkr_g_lat" class="form-control form-control-estilo2"  ng-model="marker_g.lat" ng-required="true">
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Latitud</label>
-                              <input name="f_marker_g_lng" class="form-control" ng-model="marker_g.lng" ng-required="true">
+                              <label>Longitud</label>
+                              <input name="f_marker_g_lng" class="form-control form-control-estilo2" ng-model="marker_g.lng" ng-required="true">
                             </md-input-container>
                           </td>
                           <td md-cell><md-button class="md-raised md-primary" ng-click="addMarkerG()">Agregar marcador</md-button></td>
