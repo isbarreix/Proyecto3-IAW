@@ -88,7 +88,6 @@
                   <md-content>
 
                     <md-list id="markerlist" class="make-scrollable" flex>
-
                       <md-list-item class="md-3-line" ng-repeat="marker in markerApplist |  orderBy:'name' | filter:filter" ng-click="mostrarLugar(marker)">
                         <div class="md-list-item-text">
                           <h3>Nombre: {{ marker.name }}</h3>
@@ -96,6 +95,7 @@
                           <h4>Lugar: {{ marker.vicinity }}</h4>
                           <h4>Lat: {{ marker.lat }}</h4>
                           <h4>Lng: {{ marker.lng }}</h4>
+                          <h4>Rank: {{ marker.rank }}</h4>
                           <!--<p>{{ marker.descrip }}</p>-->
                         </div>
                         <md-divider inset></md-divider>
@@ -374,9 +374,8 @@
           </md-content>
           </div>
         </md-tab>
-        <md-tab label="Login">
-          
-
+        <md-tab label="ReadMe">
+          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
         </md-tab>
       </md-tabs>
      

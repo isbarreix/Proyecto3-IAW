@@ -7,5 +7,6 @@ module.exports = mongoose.model('Markers', new Schema({
 	lat: String, 
     lng: String,
     vicinity: String,
-    description: String
+    description: String,
+    rate: String
 }));

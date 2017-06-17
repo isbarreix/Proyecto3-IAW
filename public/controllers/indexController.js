@@ -101,6 +101,7 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 
 		function callback(results, status) {
 			if (status === google.maps.places.PlacesServiceStatus.OK) {
+                //console.log(results);
 				$scope.markerGooglelist = results;
 			}
 		}
@@ -128,7 +129,9 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 			name : $scope.marker_g.name,
 			vicinity : $scope.marker_g.vicinity,
 			lat : $scope.marker_g.lat,
-			lng : $scope.marker_g.lng
+			lng : $scope.marker_g.lng,
+            rate: $scope.marker_g.rating,
+            description: "TBD"
 		}
 		addMarker(marker);
 	}
