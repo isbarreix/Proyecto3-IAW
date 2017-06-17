@@ -161,7 +161,7 @@ apiRoutes.post('/markerapplist', function(req, res) {
         description: 'TBD'
 	});
     
-	marker.save(function(err) {
+	marker.save( function(err) {
 		if (err) throw err;
 
 		//console.log('Marker saved successfully');
@@ -174,7 +174,11 @@ apiRoutes.post('/markerapplist', function(req, res) {
     */
 });
 
-apiRoutes.post('/markerapplist/:id', function(req, res) {
+
+/*
+	Edita un marcador en la bd
+*/
+apiRoutes.put('/markerapplist/:id', function(req, res) {
 	var id = req.params.id;
 	Marker.findById(id, function (err, marker) {
 		
@@ -190,6 +194,22 @@ apiRoutes.post('/markerapplist/:id', function(req, res) {
 			});
 	});
 
+});
+
+
+/*
+	Elimina un marcador de la bd
+*/
+apiRoutes.delete('/markerapplist/:id', function(req, res) {
+	console.log("HOLAQQQQQQQQQQQQ"+id);
+	/*var id = req.params.id;
+	Marker.findByIdAndRemove(id, function(err, marker) {
+		if (err) throw err;
+
+		//console.log('Marker saved successfully');
+		res.json({ success: true });
+	});
+*/
 });
 
 apiRoutes.get('/check', function(req, res) {

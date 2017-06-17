@@ -307,9 +307,9 @@
                             </md-input-container>
                           </td>
                           <td md-cell><md-button class="md-raised md-primary" ng-click="addMarkerApp()">Agregar marcador</md-button></td>
-                          <td md-cell><md-button class="md-raised" ng-click="updateMarker()">Modificar</md-button></td>
+                          <td md-cell><md-button class="md-raised" ng-click="updateMarker(marker_app._id)">Modificar</md-button></td>
                           <td md-cell><md-button class="md-raised" ng-click="deselectMaker_app()">Limpiar</md-button></td> 
-                          <td md-cell><md-button class="md-raised md-warn">Eliminar</md-button></td> 
+                          <td md-cell><md-button class="md-raised md-warn" ng-click="removeMarker(marker_app._id)">Eliminar</md-button></td> 
                         </tr>
                       </form>                        
                     </tbody>

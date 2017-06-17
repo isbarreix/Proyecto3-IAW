@@ -156,15 +156,26 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
     /*
       Metodo que se ecarga de editar un marcador de la bd
     */
-    $scope.updateMarker = function(){
+    $scope.updateMarker = function(id) {
       //	console.log($scope.marker_app._id)
       	var request = { marker: $scope.marker_app, token: token  };
-		$http.post('/api/markerapplist/'+$scope.marker_app._id, request).then(function(response) {
+		$http.put('/api/markerapplist/'+id, request).then(function(response) {
         	//console.log(response);
 			getMarcadores();
         });
     }
-  
+	
+	/*
+      Metodo que se ecarga de elimina un marcador de la bd
+    */
+	$scope.removeMarker = function(id) {
+		var request = { marker: $scope.marker_app, token: token  };
+		$http.delete('/api/markerapplist/'+id, request).then(function(response) {
+        	//console.log(response);
+			getMarcadores();
+        });
+	}
+	
 	$scope.deselectMaker_app = function() {
         //$scope.marker_app="";
     }	
