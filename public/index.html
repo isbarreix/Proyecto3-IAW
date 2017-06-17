@@ -89,7 +89,7 @@
 
                     <md-list id="markerlist" class="make-scrollable" flex>
 
-                      <md-list-item class="md-3-line" ng-repeat="marker in markerlist |  orderBy:'name' | filter:filter" ng-click="null">
+                      <md-list-item class="md-3-line" ng-repeat="marker in markerlist |  orderBy:'name' | filter:filter" ng-click="mostrarLugar()">
                         <div class="md-list-item-text">
                           <h3>Nombre: {{ marker.name }}</h3>
                           <h4>ID:{{ marker.id }}</h4>
@@ -110,7 +110,7 @@
                 <!--Mapa-->
                 <div flex="66" class="map-container">
                   <ng-map zoom="10" center="-38.70, -62.27" id="map">
-                    <marker ng-repeat="marker in markerlist" position="{{ marker.geometry.location.lat() }}, {{ marker.geometry.location.lng() }}"></marker>
+                    <marker ng-repeat="marker in markerlist" position="{{ marker.geometry.location.lat() }}, {{ marker.geometry.location.lng() }}"  on-click="mostrarLugar()"></marker>
                   </ng-map>
                 </div>
               </div> 

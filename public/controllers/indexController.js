@@ -39,13 +39,16 @@ app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($sc
    refresh();
     
     $scope.addComentario = function(){
-        console.log("hola");
         console.log($scope.comment);
         $http.post("/comments", $scope.comment).then(function(response){
             console.log(response.data);
             refresh();
         });
     };
+    
+    $scope.mostrarLugar = function(){
+        console.log("mostrarLugar");
+    }
 
 }]);
 
