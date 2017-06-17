@@ -157,7 +157,8 @@ apiRoutes.post('/markerapplist', function(req, res) {
         vicinity: req.body.marker.vicinity,
         lat: req.body.marker.lat,
         lng: req.body.marker.lng,
-        description: "TBD"
+        /*description: req.body.marker.description*/
+        description: 'TBD'
 	});
     
 	marker.save(function(err) {
@@ -171,6 +172,24 @@ apiRoutes.post('/markerapplist', function(req, res) {
        res.json(docs); 
     });
     */
+});
+
+apiRoutes.post('/markerapplist/:id', function(req, res) {
+	var id = req.params.id;
+	Marker.findById(id, function (err, marker) {
+		
+			marker.name = req.body.marker.name;
+        	marker.vicinity = req.body.marker.vicinity;
+        	marker.lat = req.body.marker.lat;
+        	marker.lng = req.body.marker.lng;
+        	marker.description = req.body.marker.description;
+		
+			marker.save(function(err) {
+				if (err) throw err;
+				res.json({ success: true });
+			});
+	});
+
 });
 
 apiRoutes.get('/check', function(req, res) {

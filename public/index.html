@@ -211,6 +211,7 @@
                             <h3>Nombre: {{ marker_app.name }}</h3>
                             <h4>ID:{{ marker_app._id }}</h4>
                             <h4>Lugar: {{ marker_app.vicinity }}</h4>
+                            <h4>Decription: {{ marker_app.description; }}</h4>
                             <h4>Lat: {{ marker_app.lat }}</h4>
                             <h4>Lng: {{ marker_app.lng }}</h4>
                             <!--<p>{{ marker.descrip }}</p>-->
@@ -290,7 +291,7 @@
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Descripción</label>
-                              <textarea name="f_mkr_g_desc" class="form-control form-control-estilo2"></textarea>
+                              <textarea name="f_mkr_g_desc" class="form-control form-control-estilo2" ng-model="marker_app.description"></textarea>
                             </md-input-container>
                           </td>         
                           <td md-cell>                          
@@ -306,8 +307,9 @@
                             </md-input-container>
                           </td>
                           <td md-cell><md-button class="md-raised md-primary" ng-click="addMarkerApp()">Agregar marcador</md-button></td>
-                          <td md-cell><md-button class="md-raised" ng-click="null" ng-disabled="true">Actualizar</md-button></td>&nbsp;&nbsp;
+                          <td md-cell><md-button class="md-raised" ng-click="updateMarker()">Modificar</md-button></td>
                           <td md-cell><md-button class="md-raised" ng-click="deselectMaker_app()">Limpiar</md-button></td> 
+                          <td md-cell><md-button class="md-raised md-warn">Eliminar</md-button></td> 
                         </tr>
                       </form>                        
                     </tbody>

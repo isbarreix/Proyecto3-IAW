@@ -1,7 +1,7 @@
 var app = angular.module('AppMaps', ['ngMaterial', 'ngMap']);
 
 var token, registrado;
-app.controller("TabOneCtrl", function($scope) {
+app.controller("TabOneCtrl", function ($scope) {
 	$scope.title = "Count Upwards";
 
 });
@@ -9,17 +9,17 @@ app.controller("TabOneCtrl", function($scope) {
 //	Documentacion api
 
 
-app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($scope, $http, $location, NgMap) {
+app.controller('MapCtrl', ['$scope', '$http', '$location', 'NgMap', function ($scope, $http, $location, NgMap) {
     
-    $scope.fbhref=$location.absUrl();
+	$scope.fbhref = $location.absUrl();
     var mapa;
 	
-    NgMap.getMap().then(function(map) {
+    NgMap.getMap().then(function (map) {
 		mapa = map;
 	});
 	
-    function getMarcadores(){
-			$http.get('/markerApplist').then(function(response) {
+    function getMarcadores() {
+			$http.get('/markerApplist').then(function (response) {
 				//	console.log(response.data);
 				$scope.markerApplist = response.data;
 			 });
@@ -27,15 +27,17 @@ app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($sc
     
     getMarcadores();
 
-    var refresh = function(){ $http.get("/comments").then(function(response){
+    var refresh = function () { 
+		$http.get("/comments").then(function (response) {
        //console.log("data recibida");
-        $scope.comments =response.data;
-       $scope.comment = null;
-    });                             
-             		}
+        	$scope.comments = response.data;
+       		$scope.comment = null;
+		});
+	};
+	
    refresh();
     
-    $scope.addComentario = function(){
+    $scope.addComentario = function() {
         //console.log($scope.comment);
         $http.post("/comments", $scope.comment).then(function(response){
             //console.log(response.data);
@@ -43,10 +45,10 @@ app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($sc
         });
     };
     
-    $scope.mostrarLugar = function(marker){
+    $scope.mostrarLugar = function(marker) {
         //console.log("Entre a mostrarLugar con");
        // console.log(marker);
-        NgMap.getMap().then(function(map) {
+        NgMap.getMap().then(function (map) {
             map.setZoom(20);
             map.setCenter(new google.maps.LatLng(marker.lat, marker.lng));
         });
@@ -64,7 +66,7 @@ app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($sc
     }
     
     function cargarComentarios(id){
-        $scope.fbhref=$location.absUrl()+"/"+id;
+        $scope.fbhref = $location.absUrl()+"/"+id;
 	}
 
 }]);
@@ -72,6 +74,18 @@ app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($sc
 
 app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http, NgMap) {
     var mapa;
+  	$scope.registrado = function() {
+      return registrado;
+    }
+    
+    $scope.loginAdmin = function() {
+        $http.post("/api/login", $scope.admin).then(function(response){
+            //console.log(response.data.token);
+            token = response.data.token;
+            registrado = true;
+        });
+    }
+    
     function buscarMarcadores(event){
         
         NgMap.getMap().then(function(map) {
@@ -118,23 +132,39 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 		}
 		addMarker(marker);
 	}
-	
+    /*
+      Metodo que se ecarga de agregar un marcador de la bd
+    */
 	function addMarker(marker){
-        var request = {marker: marker, token: token}
+        var request = { marker: marker, token: token  };
        // console.log(request);
 		$http.post('/api/markerapplist', request).then(function(response) {
         	//console.log(response);
 			getMarcadores();
         });
 	}
-	
+	/*
+      Metodo que se ecarga de traer un marcador de la bd
+    */
 	$scope.editAppMarker = function(id) {
 		$http.get('/markerapplist/'+id).then(function(response) {
             //console.log(response.data);
 			$scope.marker_app = response.data; 
         });
     };
-	
+    
+    /*
+      Metodo que se ecarga de editar un marcador de la bd
+    */
+    $scope.updateMarker = function(){
+      //	console.log($scope.marker_app._id)
+      	var request = { marker: $scope.marker_app, token: token  };
+		$http.post('/api/markerapplist/'+$scope.marker_app._id, request).then(function(response) {
+        	//console.log(response);
+			getMarcadores();
+        });
+    }
+  
 	$scope.deselectMaker_app = function() {
         //$scope.marker_app="";
     }	
@@ -149,22 +179,12 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 		$scope.marker_g.lng = marker.geometry.location.lng();
     };
 	
-	$scope.registrado = function() {
-      return registrado;
-    }
-    
-    $scope.loginAdmin = function() {
-        $http.post("/api/login", $scope.admin).then(function(response){
-            //console.log(response.data.token);
-            token = response.data.token;
-            registrado = true;
-        });
-    }
+
     
     $scope.click = function(event) {
         buscarMarcadores(event);
     }	
-	
+
 }]);
 /*
 	google.maps.event.addListener(marker, 'click', function() {
