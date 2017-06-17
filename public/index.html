@@ -89,7 +89,7 @@
 
                     <md-list id="markerlist" class="make-scrollable" flex>
 
-                      <md-list-item class="md-3-line" ng-repeat="marker in markerlist |  orderBy:'name' | filter:filter" ng-click="mostrarLugar()">
+                      <md-list-item class="md-3-line" ng-repeat="marker in markerApplist |  orderBy:'name' | filter:filter" ng-click="mostrarLugar()">
                         <div class="md-list-item-text">
                           <h3>Nombre: {{ marker.name }}</h3>
                           <h4>ID:{{ marker.id }}</h4>

@@ -13,22 +13,15 @@ app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($sc
     
     $scope.fbhref=$location.absUrl();
     
-    NgMap.getMap().then(function(map) {
-        var service = new google.maps.places.PlacesService(map);
-        service.nearbySearch({
-            location: map.getCenter(),
-              radius: 10000,
-              type: ['atm']
-            }, callback);
-        
-        function callback(results, status) {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                //$scope.positions = results;
-                $scope.markerlist = results;
-                console.log(results);
-            }
-        }
-      });
+    
+    function getMarcadores(){
+			$http.get('/markerApplist').then(function(response) {
+				//	console.log(response.data);
+				$scope.markerApplist = response.data;
+			 });
+	}
+    
+    getMarcadores();
 
     var refresh = function(){ $http.get("/comments").then(function(response){
        console.log("data recibida");
