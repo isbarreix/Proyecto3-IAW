@@ -12,8 +12,12 @@ app.controller("TabOneCtrl", function($scope) {
 app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($scope, $http, $location, NgMap) {
     
     $scope.fbhref=$location.absUrl();
-    
-    
+    var mapa;
+	
+    NgMap.getMap().then(function(map) {
+		mapa = map;
+	});
+	
     function getMarcadores(){
 			$http.get('/markerApplist').then(function(response) {
 				//	console.log(response.data);
@@ -42,12 +46,20 @@ app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($sc
     $scope.mostrarLugar = function(){
         console.log("mostrarLugar");
     }
+	
+	$scope.pinClicked = function(events, marker) {
+		var pos = marker.$index;
+		//	console.log(marker.marker_app.name);
+		mapa.setZoom(20);
+				console.log(mapa.makers);
+		mapa.setCenter(mapa.markers[pos].getPosition());
+  	}
 
 }]);
 
 
 app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http, NgMap) {
-    
+    var mapa;
     function buscarMarcadores(event){
         
         NgMap.getMap().then(function(map) {
@@ -66,6 +78,7 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 				$scope.markerGooglelist = results;
 			}
 		}
+        mapa = map;
         });
     }
 	
@@ -124,11 +137,11 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 		$scope.marker_g.lng = marker.geometry.location.lng();
     };
 	
-	$scope.registrado = function(){
+	$scope.registrado = function() {
       return registrado;
     }
     
-    $scope.loginAdmin = function(){
+    $scope.loginAdmin = function() {
         $http.post("/api/login", $scope.admin).then(function(response){
             console.log(response.data.token);
             token = response.data.token;
@@ -136,10 +149,18 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
         });
     }
     
-    $scope.click = function(event){
+    $scope.click = function(event) {
         buscarMarcadores(event);
-    }
+    }	
 	
+	$scope.pinClicked = function(events, marker) {
+		var pos = marker.$index;
+		console.log(marker);
+		console.log("Hola");
+		console.log(mapa.makers);
+		mapa.setZoom(20);
+		//mapa.setCenter(mapa.markers[pos].getPosition());
+  	}
 }]);
 /*
 	google.maps.event.addListener(marker, 'click', function() {
@@ -151,6 +172,7 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 
 <<<<<<< HEAD
 ;*/
+
 
 
 app.controller("LoginController",['$scope','$http', function($scope,$http) {
