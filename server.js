@@ -110,7 +110,7 @@ apiRoutes.post('/login', function(req, res) {
 // route middleware to authenticate and check token
 // ---------------------------------------------------------
 apiRoutes.use(function(req, res, next) {
-    console.log(req.body);
+    //console.log(req.body);
     
 	// check header or url parameters or post parameters for token
 	var token = req.body.token || req.headers['x-access-token'];
@@ -163,7 +163,7 @@ apiRoutes.post('/markerapplist', function(req, res) {
 	marker.save(function(err) {
 		if (err) throw err;
 
-		console.log('Marker saved successfully');
+		//console.log('Marker saved successfully');
 		res.json({ success: true });
 	});
     
@@ -188,7 +188,7 @@ app.use('/api', apiRoutes);
 
 
 app.get("/comments", function (req, resp){
-    console.log("I received a get");
+    //console.log("I received a get");
     
     Comment.find(function(err,docs){
         //console.log(docs);
@@ -197,7 +197,7 @@ app.get("/comments", function (req, resp){
 });
 
 app.post("/comments", function(req,resp){
-    console.log(req.body);
+    //console.log(req.body);
     var comentario = new Comment({
         name: req.body.name,
         comment: req.body.comment

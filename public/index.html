@@ -89,7 +89,7 @@
 
                     <md-list id="markerlist" class="make-scrollable" flex>
 
-                      <md-list-item class="md-3-line" ng-repeat="marker in markerApplist |  orderBy:'name' | filter:filter" ng-click="mostrarLugar()">
+                      <md-list-item class="md-3-line" ng-repeat="marker in markerApplist |  orderBy:'name' | filter:filter" ng-click="mostrarLugar(marker)">
                         <div class="md-list-item-text">
                           <h3>Nombre: {{ marker.name }}</h3>
                           <h4>ID:{{ marker._id }}</h4>
@@ -110,7 +110,7 @@
                 <!--Mapa-->
                 <div flex="66" class="map-container">
                   <ng-map zoom="10" center="-38.70, -62.27" id="map">
-                    <marker ng-repeat="marker_app in markerApplist" position="{{ marker_app.lat }}, {{ marker_app.lng }}" on-click="pinClicked(this)"></marker>
+
 					<info-window id="iw_mkr_app">
                       <div ng-non-bindable="">
                         id: {{ marker_app._id}}<br/>
@@ -118,6 +118,9 @@
                       </div>
                     </info-window>	 
 					  
+
+                    <marker ng-repeat="m in markerApplist" position="{{ m.lat }}, {{ m.lng }}"  on-click="mostrarLugarMarker(m)"></marker>
+
                   </ng-map>
                 </div>
               </div> 
@@ -379,7 +382,9 @@
       <!--Angular-Material-->
       <script src="/modules/angular-material/angular-material.min.js"></script>
       <!--Google Maps-->
+
        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCVfj-6OoRJFojwfhDdbGGrqDa9g4BU4fs&libraries=places"></script>
+
 <!--      <script src="https://maps.google.com/maps/api/js"></script>-->
       <!--Directivas ng-maps-->
       <script src="/modules/ngmap/build/scripts/ng-map.min.js"></script>
