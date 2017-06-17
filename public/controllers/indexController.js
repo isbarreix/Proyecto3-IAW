@@ -24,7 +24,7 @@ app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($sc
     getMarcadores();
 
     var refresh = function(){ $http.get("/comments").then(function(response){
-       console.log("data recibida");
+       //console.log("data recibida");
         $scope.comments =response.data;
        $scope.comment = null;
     });                             
@@ -32,15 +32,35 @@ app.controller('MapCtrl', ['$scope', '$http','$location', 'NgMap', function ($sc
    refresh();
     
     $scope.addComentario = function(){
-        console.log($scope.comment);
+        //console.log($scope.comment);
         $http.post("/comments", $scope.comment).then(function(response){
-            console.log(response.data);
+            //console.log(response.data);
             refresh();
         });
     };
     
-    $scope.mostrarLugar = function(){
-        console.log("mostrarLugar");
+    $scope.mostrarLugar = function(marker){
+        console.log("Entre a mostrarLugar con");
+        console.log(marker);
+        NgMap.getMap().then(function(map) {
+            map.setZoom(20);
+            map.setCenter(new google.maps.LatLng(marker.lat, marker.lng));
+        });
+        
+        cargarComentarios(marker._id);
+    }
+    
+    $scope.mostrarLugarMarker = function(marker){
+        console.log("Entre a mostrarLugar con");
+        console.log(marker);
+        NgMap.getMap().then(function(map) {
+            map.setZoom(20);
+            map.setCenter(marker.latLng);
+        });
+    }
+    
+    function cargarComentarios(id){
+        $scope.fbhref=$location.absUrl()+"/"+id;
     }
 
 }]);
@@ -96,9 +116,9 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 	
 	function addMarker(marker){
         var request = {marker: marker, token: token}
-        console.log(request);
+       // console.log(request);
 		$http.post('/api/markerapplist', request).then(function(response) {
-        	console.log(response);
+        	//console.log(response);
 			getMarcadores();
         });
 	}
@@ -130,7 +150,7 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
     
     $scope.loginAdmin = function(){
         $http.post("/api/login", $scope.admin).then(function(response){
-            console.log(response.data.token);
+            //console.log(response.data.token);
             token = response.data.token;
             registrado = true;
         });
@@ -157,7 +177,7 @@ app.controller("LoginController",['$scope','$http', function($scope,$http) {
     
     $scope.loginAdmin = function(){
         $http.post("/api/login", $scope.admin).then(function(response){
-            console.log(response.data.token);
+            //console.log(response.data.token);
             token = response.data.token;
             registrado = true;
         });
