@@ -54,7 +54,7 @@ app.get('/setup', function(req, res) {
 	nick.save(function(err) {
 		if (err) throw err;
 
-		console.log('User saved successfully');
+		//	console.log('User saved successfully');
 		res.json({ success: true });
 	});
 });
@@ -110,7 +110,7 @@ apiRoutes.post('/login', function(req, res) {
 // route middleware to authenticate and check token
 // ---------------------------------------------------------
 apiRoutes.use(function(req, res, next) {
-    console.log(req.body);
+    //	console.log(req.body);
     
 	// check header or url parameters or post parameters for token
 	var token = req.body.token || req.headers['x-access-token'];
@@ -157,9 +157,8 @@ apiRoutes.post('/markerapplist', function(req, res) {
         vicinity: req.body.marker.vicinity,
         lat: req.body.marker.lat,
         lng: req.body.marker.lng,
-        rate: req.body.marker.rate,
-        /*description: req.body.marker.description*/
-        description: 'TBD'
+        /*rate: req.body.marker.rate,*/
+        description: req.body.marker.description
 	});
     
 	marker.save( function(err) {
