@@ -74,7 +74,7 @@ app.controller('MapCtrl', ['$scope', '$http', '$location', 'NgMap', function ($s
 
 
 app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http, NgMap) {
-    var mapa;
+    var mapa; 
   	$scope.registrado = function() {
       return registrado;
     }
@@ -122,6 +122,10 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 	
 	$scope.addMarkerApp = function() {
      	addMarker($scope.marker_app);
+		$scope.marker_app = null;
+		console.log($scope.markerAppForm);
+		$scope.markerAppForm.$dirty = false;
+		console.log($scope.markerAppForm);
     };
 	
 	$scope.addMarkerG = function() {
@@ -131,10 +135,11 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 			vicinity : $scope.marker_g.vicinity,
 			lat : $scope.marker_g.lat,
 			lng : $scope.marker_g.lng,
-            rate: $scope.marker_g.rating,
-            description: "TBD"
+            /*rate: $scope.marker_g.rating,*/
+            description: $scope.marker_g.description
 		}
 		addMarker(marker);
+		$scope.marker_g = null;
 	}
     /*
       Metodo que se ecarga de agregar un marcador de la bd
@@ -167,6 +172,7 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
         	//console.log(response);
 			getMarcadores();
         });
+		$scope.marker_app = null;
     }
 	
 	/*
@@ -181,11 +187,11 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 	}
 	
 	$scope.deselectMaker_app = function() {
-        //$scope.marker_app="";
+        $scope.marker_app = null;
     }	
 	
 	$scope.deselectMaker_g = function() {
-       // $scope.marker_g="";
+        $scope.marker_g = null;
     }
 		
 	$scope.editGoogleMarker = function(marker) {
