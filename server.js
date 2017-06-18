@@ -245,7 +245,7 @@ app.post("/comments", function(req,resp){
     })
 });
 
-//	get listMaker
+//	get lista de todos los marcadores este es uno de los endpoints
 app.get("/markerapplist", function(req, res) {
     
     Marker.find(function (err, docs) {
@@ -254,10 +254,18 @@ app.get("/markerapplist", function(req, res) {
 });
 
 
-//	get Marker
+//	get de un marker, este es el otro endpoint
 app.get('/markerapplist/:id', function(req, res) {
     var id = req.params.id;
     Marker.findOne({_id: mongojs.ObjectId(id)}, function(err, docs) {
+       res.json(docs); 
+    });
+});
+
+// get de markers por ciudad
+app.get('/markerapplistCity/:city', function(req, res) {
+    var city = req.params.city;
+    Marker.find({vicinity: '/'+city+'/'}, function(err, docs) {
        res.json(docs); 
     });
 });

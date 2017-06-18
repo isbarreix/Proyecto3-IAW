@@ -67,6 +67,7 @@ app.controller('MapCtrl', ['$scope', '$http', '$location', 'NgMap', function ($s
     
     function cargarComentarios(id){
         $scope.fbhref = $location.absUrl()+"/"+id;
+        FB.XFBML.parse();
 	}
 
 }]);
