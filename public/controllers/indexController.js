@@ -75,8 +75,11 @@ app.controller('MapCtrl', ['$scope', '$http', '$location', 'NgMap', function ($s
 
 app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http, NgMap) {
     var mapa; 
+	$scope.form_g = true;
+	$scope.form_app = true;
+	
   	$scope.registrado = function() {
-      return registrado;
+     	return registrado;
     }
     
     $scope.loginAdmin = function() {
@@ -123,9 +126,7 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 	$scope.addMarkerApp = function() {
      	addMarker($scope.marker_app);
 		$scope.marker_app = null;
-		console.log($scope.markerAppForm);
-		$scope.markerAppForm.$dirty = false;
-		console.log($scope.markerAppForm);
+		$scope.form_app = true;
     };
 	
 	$scope.addMarkerG = function() {
@@ -140,11 +141,12 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 		}
 		addMarker(marker);
 		$scope.marker_g = null;
+		$scope.form_g = true;
 	}
     /*
       Metodo que se ecarga de agregar un marcador de la bd
     */
-	function addMarker(marker){
+	function addMarker(marker) {
         var request = { marker: marker, token: token  };
        // console.log(request);
 		$http.post('/api/markerapplist', request).then(function(response) {
@@ -159,7 +161,9 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 		$http.get('/markerapplist/'+id).then(function(response) {
             //console.log(response.data);
 			$scope.marker_app = response.data; 
+			mostrarLugar(response.data);
         });
+		$scope.form_app = false;
     };
     
     /*
@@ -173,6 +177,7 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 			getMarcadores();
         });
 		$scope.marker_app = null;
+		$scope.form_app = true;
     }
 	
 	/*
@@ -184,27 +189,61 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
         	//console.log(response);
 			getMarcadores();
         });
+		$scope.marker_app = null;
+		$scope.form_app = true;
 	}
 	
 	$scope.deselectMaker_app = function() {
         $scope.marker_app = null;
+		$scope.form_app = true;
     }	
 	
 	$scope.deselectMaker_g = function() {
         $scope.marker_g = null;
+		$scope.form_g = true;
     }
 		
 	$scope.editGoogleMarker = function(marker) {
+		$scope.form_g = false;
 		$scope.marker_g = marker;
 		$scope.marker_g.lat = marker.geometry.location.lat();
 		$scope.marker_g.lng = marker.geometry.location.lng();
+		mostrarLugarG(marker);
     };
 	
 
-    
     $scope.click = function(event) {
         buscarMarcadores(event);
     }	
+	/*
+		Muestra marcador en el panel
+	*/
+	function mostrarLugar(marker) {
+		//console.log("Entre a mostrarLugar con");
+        //console.log(marker);
+		//console.log(mapa);
+		mapa.setZoom(20);
+        mapa.setCenter(new google.maps.LatLng(marker.lat, marker.lng));
+   
+    }
+	
+	function mostrarLugarG(marker) {
+		//console.log("Entre a mostrarLugar con");
+        //console.log(marker);
+		//console.log(mapa);
+		mapa.setZoom(20);
+        mapa.setCenter(new google.maps.LatLng(marker.geometry.location.lat(), marker.geometry.location.lng()));
+   
+    }
+    
+   /* $scope.mostrarLugarMarker = function(marker){
+        //console.log("Entre a mostrarLugar con");
+        console.log(marker);
+        NgMap.getMap().then(function(map) {
+            map.setZoom(20);
+            map.setCenter(marker.latLng);
+        });
+    }*/
 
 }]);
 /*

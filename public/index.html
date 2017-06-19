@@ -119,7 +119,7 @@
                     </info-window>	 
 					  
 
-                    <marker ng-repeat="m in markerApplist" position="{{ m.lat }}, {{ m.lng }}"  on-click="mostrarLugarMarker(m)"></marker>
+                    <marker ng-repeat="m in markerApplist" position="{{ m.lat }}, {{ m.lng }}" on-click="mostrarLugarMarker(m)"></marker>
 
                   </ng-map>
                 </div>
@@ -197,8 +197,8 @@
               </div>
           </md-content>
           <md-content class="md-padding" ng-style="{'visibility': registrado() ? 'visible':'hidden'}">
-            <h1 class="md-display-2">Tab Three</h1>
-            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+            <h1 class="md-display-2">Panel Administrador</h1>
+            <p>Edición de mapas: podras agregar un nuevo marcador de diferentes maneras: A través de la inscripción de un formulario por tu cuenta; Obtienendo una sugerencia de Google Places. Además podrás editar tus marcadores de la manera que quieras</p>
             <div>
               <div layout="row" layout-sm="column" id="markerlist_view">
 				  <div flex=33>
@@ -211,10 +211,9 @@
                             <h3>Nombre: {{ marker_app.name }}</h3>
                             <h4>ID:{{ marker_app._id }}</h4>
                             <h4>Lugar: {{ marker_app.vicinity }}</h4>
-                            <h4>Decription: {{ marker_app.description; }}</h4>
+							<p>Decription: {{ marker_app.description; }}</p>
                             <h4>Lat: {{ marker_app.lat }}</h4>
                             <h4>Lng: {{ marker_app.lng }}</h4>
-                            <!--<p>{{ marker.descrip }}</p>-->
                           </div>
                           <md-divider inset></md-divider>
                         </md-list-item>
@@ -250,7 +249,7 @@
                 <div flex="66" class="map-container">
                   <ng-map zoom="10" center="-38.70, -62.27" id="mapAdmin" on-click="click(event)">
                     <marker ng-repeat="marker_g in markerGooglelist" position="{{ marker_g.geometry.location.lat() }}, {{ marker_g.geometry.location.lng() }}" on-click="pinClicked(this)"></marker>
-                    <marker ng-repeat="marker_app in markerApplist" position="{{ marker_app.lat }}, {{ marker_app.lng }}" icon="../img/marker.png" on-click="pinClicked(this)"></marker>
+                    <marker ng-repeat="marker_app in markerApplist" position="{{ marker_app.lat }}, {{ marker_app.lng }}" icon="../img/marker.png" on-click="pinClicked(this)" on-click="mostrarLugarMarker(m)"></marker>
                   				
 				  </ng-map>
                 </div>
@@ -279,13 +278,13 @@
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Título</label>
-                              <textarea name="f_mrkr_app_name" class="form-control form-control-estilo2" ng-model="marker_app.name" ng-required="true"></textarea>
+                              <textarea name="f_mrkr_app_name" class="form-control form-control-estilo2" ng-model="marker_app.name"></textarea>
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Locación</label>
-                              <textarea name="f_mrkr_app_vic" class="form-control form-control-estilo2" ng-model="marker_app.vicinity" ng-required="true"></textarea>
+                              <textarea name="f_mrkr_app_vic" class="form-control form-control-estilo2" ng-model="marker_app.vicinity"></textarea>
                             </md-input-container>
                           </td>
                           <td md-cell>
@@ -297,19 +296,19 @@
                           <td md-cell>                          
                             <md-input-container class="md-block" flex>
                               <label>Latitud</label>
-                              <input name="f_mrkr_app_lat" class="form-control form-control-estilo2" ng-model="marker_app.lat" ng-required="true">
+                              <input name="f_mrkr_app_lat" class="form-control form-control-estilo2" ng-model="marker_app.lat">
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Longitud</label>
-                              <input name="f_mrkr_app_lng" class="form-control form-control-estilo2" ng-model="marker_app.lng" ng-required="true">
+                              <input name="f_mrkr_app_lng" class="form-control form-control-estilo2" ng-model="marker_app.lng">
                             </md-input-container>
                           </td>
-                          <td md-cell><md-button class="md-raised md-primary" ng-click="addMarkerApp()">Agregar marcador</md-button></td>
-                          <td md-cell><md-button class="md-raised" ng-click="updateMarker(marker_app._id)">Modificar</md-button></td>
+                          <td md-cell><md-button class="md-raised md-primary" ng-click="addMarkerApp()" ng-disabled="!form_app">Agregar marcador</md-button></td>
+                          <td md-cell><md-button class="md-raised" ng-click="updateMarker(marker_app._id)" ng-disabled="form_app">Modificar</md-button></td>
                           <td md-cell><md-button class="md-raised" ng-click="deselectMaker_app()">Limpiar</md-button></td> 
-                          <td md-cell><md-button class="md-raised md-warn" ng-click="removeMarker(marker_app._id)">Eliminar</md-button></td> 
+                          <td md-cell><md-button class="md-raised md-warn" ng-click="removeMarker(marker_app._id)" ng-disabled="form_app">Eliminar</md-button></td> 
                         </tr>
                       </form>                        
                     </tbody>
@@ -326,39 +325,39 @@
                     </thead>
                     <tbody md-body>
 						
-                      <form name="markerGoogleForm">
+                      <form name="markerGoogleForm" ng-disabled="true">
                         <tr md-row>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Título</label>
-                              <textarea name="f_mrkr_g_name" class="form-control form-control-estilo2" ng-model="marker_g.name" ng-required="true"></textarea>
+                              <textarea name="f_mrkr_g_name" class="form-control form-control-estilo2" ng-model="marker_g.name" ng-disabled="form_g"></textarea>
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Locación</label>
-                              <textarea name="f_mkr_g_vic" class="form-control form-control-estilo2" ng-model="marker_g.vicinity" ng-required="true"></textarea>
+                              <textarea name="f_mkr_g_vic" class="form-control form-control-estilo2" ng-model="marker_g.vicinity" ng-disabled="form_g"></textarea>
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Descripción</label>
-                              <textarea name="f_mkr_g_desc" class="form-control form-control-estilo2" ng-model="marker_g.description"></textarea>
+                              <textarea name="f_mkr_g_desc" class="form-control form-control-estilo2" ng-model="marker_g.description" ng-disabled="form_g"></textarea>
                             </md-input-container>
                           </td>                          
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Latitud</label>
-                              <input name="f_mkr_g_lat" class="form-control form-control-estilo2"  ng-model="marker_g.lat" ng-required="true">
+                              <input name="f_mkr_g_lat" class="form-control form-control-estilo2"  ng-model="marker_g.lat" ng-disabled="form_g">
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Longitud</label>
-                              <input name="f_marker_g_lng" class="form-control form-control-estilo2" ng-model="marker_g.lng" ng-required="true">
+                              <input name="f_marker_g_lng" class="form-control form-control-estilo2" ng-model="marker_g.lng" ng-disabled="form_g">
                             </md-input-container>
                           </td>
-                          <td md-cell><md-button class="md-raised md-primary" ng-click="addMarkerG()">Agregar marcador</md-button></td>
+                          <td md-cell><md-button class="md-raised md-primary" ng-click="addMarkerG()" ng-disabled="form_g">Agregar marcador</md-button></td>
                           <td md-cell><md-button class="md-raised" ng-click="deselectMaker_g()">Limpiar</md-button></td> 
                         </tr>
                       </form>                        
