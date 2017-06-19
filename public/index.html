@@ -90,13 +90,10 @@
                     <md-list id="markerlist" class="make-scrollable" flex>
                       <md-list-item class="md-3-line" ng-repeat="marker in markerApplist |  orderBy:'name' | filter:filter" ng-click="mostrarLugar(marker)">
                         <div class="md-list-item-text">
-                          <h3>Nombre: {{ marker.name }}</h3>
-                          <h4>ID:{{ marker._id }}</h4>
-                          <h4>Lugar: {{ marker.vicinity }}</h4>
-                          <h4>Lat: {{ marker.lat }}</h4>
-                          <h4>Lng: {{ marker.lng }}</h4>
-                          <h4>Rank: {{ marker.rank }}</h4>
-                          <!--<p>{{ marker.descrip }}</p>-->
+                          <h3><strong>Nombre:</strong> {{ marker.name }}</h3>
+                          <h4><strong>Lugar:</strong> {{ marker.vicinity }}</h4>
+                          <!--<h4>Rank: {{ marker.rank }}</h4>-->
+                          <h4><strong>Descripción:</strong>{{ marker.description }}</h4>
                         </div>
                         <md-divider inset></md-divider>
                       </md-list-item>
@@ -140,7 +137,7 @@
                     </md-input-container>
                   </div>
                   <div layout="colum">
-                    <md-button class="md-raised md-primary" ng-click="addComentario()">Agregar</md-button>
+                    <md-button class="md-raised md-primary" ng-click="addComentario(marker._id)" ng-disabled="marker==null">Agregar</md-button>
                   </div>
                   
                 </div>
@@ -148,21 +145,28 @@
 
 
                 <div flex=66 layout="column">
-                  <h2>Comentarios sobre: <!--{{marker.nameElegido}}--></h2>
-                  <md-list-item class="md-3-line" ng-repeat="comment in comments">
-                    <div class="md-list-item-text">
-                      <h3>Nombre: {{ comment.name }}</h3>
-                      <h4>Comentario:{{ comment.comment }}</h4>
-                      <!--<p>{{ marker.descrip }}</p>-->
-                    </div>
-                    <md-divider inset></md-divider>
-                  </md-list-item>
+                  <h2 ng-show="marker==null">No ha selecciondo un lugar específico, por favor elija uno de la lista</h2>
+                  <h2 ng-show="marker!=null">Comentarios sobre: {{ marker.name }}</h2>
+                  <md-list id="commentlist" class="make-scrollable" flex>
+                    <md-list-item class="md-3-line" ng-show="comments.length==0">
+                      <h3>No hay comentarios de {{ marker.name }}, soyez le premier!</h3>
+                    </md-list-item>                    
+                    <md-list-item class="md-3-line" ng-repeat="comment in comments">
+                      <div class="md-list-item-text">
+                        <h3><strong>Nombre:</strong> {{ comment.name }}</h3>
+                        <h4><strong>Comentario:</strong>{{ comment.comment }}</h4>
+                        <h4><strong>Descripción:</strong>{{ marker.description }}</h4>
+                      </div>
+                      <md-divider inset></md-divider>
+                    </md-list-item>
+                  </md-list>
                 </div>
                   
-                <div id="fb-root"></div>
-                <div class="fb-comments" data-href="{{fbhref}}" data-numposts="5"></div>    
-                <script src="controllers/fb.js"></script>
-
+				<div ng-hide="marker==null">
+                  <div id="fb-root"></div>
+                  <div class="fb-comments" data-href="{{fbhref}}" data-numposts="5"></div>    
+                  <script src="controllers/fb.js"></script>
+                </div>
             </div>
               
               
@@ -208,12 +212,12 @@
 						  
                         <md-list-item class="md-3-line" ng-repeat="marker_app in markerApplist" ng-click="editAppMarker(marker_app._id)">
                           <div class="md-list-item-text">
-                            <h3>Nombre: {{ marker_app.name }}</h3>
-                            <h4>ID:{{ marker_app._id }}</h4>
-                            <h4>Lugar: {{ marker_app.vicinity }}</h4>
-							<p>Decription: {{ marker_app.description; }}</p>
-                            <h4>Lat: {{ marker_app.lat }}</h4>
-                            <h4>Lng: {{ marker_app.lng }}</h4>
+                            <h3><strong>Nombre:</strong> {{ marker_app.name }}</h3>
+                            <h4><strong>ID:</strong>{{ marker_app._id }}</h4>
+                            <h4><strong>Lugar:</strong> {{ marker_app.vicinity }}</h4>
+							<h4><strong>Decription:</strong> {{ marker_app.description; }}</h4>
+                            <h4><strong>Lat</strong> {{ marker_app.lat }}</h4>
+                            <h4><strong>Lng:</strong> {{ marker_app.lng }}</h4>
                           </div>
                           <md-divider inset></md-divider>
                         </md-list-item>
@@ -229,11 +233,11 @@
 
                         <md-list-item class="md-3-line" ng-repeat="marker_g in markerGooglelist" ng-click="editGoogleMarker(marker_g)">
                           <div class="md-list-item-text">
-                            <h3>Nombre: {{ marker_g.name }}</h3>
-                            <h4>ID:{{ marker_g.id }}</h4>
-                            <h4>Lugar: {{ marker_g.vicinity }}</h4>
-                            <h4>Lat: {{ marker_g.geometry.location.lat() }}</h4>
-                            <h4>Lng: {{ marker_g.geometry.location.lng() }}</h4>
+                            <h3><strong>Nombre:</strong> {{ marker_g.name }}</h3>
+                            <h4><strong>ID:</strong> {{ marker_g.id }}</h4>
+                            <h4><strong>Lugar:</strong> {{ marker_g.vicinity }}</h4>
+                            <h4><strong>Lat:</strong> {{ marker_g.geometry.location.lat() }}</h4>
+                            <h4><strong>Lng:</strong> {{ marker_g.geometry.location.lng() }}</h4>
                             <!--<p>{{ marker.descrip }}</p>-->
                           </div>
                           <md-divider inset></md-divider>

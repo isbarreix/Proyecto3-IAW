@@ -79,7 +79,7 @@ md-button{
 }
 
 #markerlist {
-  height:600px;
+  height: 600px;
 }
 
 #markerlist_view {
@@ -107,5 +107,9 @@ table thead tr th {
 }
 
 md-list-item:nth-child(even) {
-	background:rgba(158,158,158,0.1);
+  background:rgba(158,158,158,0.1);
+}
+
+#commentlist{
+  height: 300px;
 }

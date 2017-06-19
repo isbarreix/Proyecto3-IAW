@@ -222,26 +222,29 @@ app.use('/api', apiRoutes);
 // ---------------------------------------------------------
 
 
-
-
-app.get("/comments", function (req, resp){
-    //console.log("I received a get");
-    
-    Comment.find(function(err,docs){
-        //console.log(docs);
+/*
+	Obtiene la lista de comentarios de un marker especifico
+*/
+app.get("/comments/:id", function (req, resp) {    
+    var id = req.params.id;
+    Comment.find({ id_marker: id }, function(err,docs){
         resp.json(docs);
-    })
+    });
 });
 
-app.post("/comments", function(req,resp){
-    //console.log(req.body);
+
+/*
+ agrega un nuevo comentario a un marker seleccionado
+*/
+app.post("/comments/:id", function(req,resp) {
     var comentario = new Comment({
         name: req.body.name,
-        comment: req.body.comment
-    })
+        comment: req.body.comment,
+		id_marker: req.params.id
+    });
     comentario.save(function(err,doc){
         resp.json(doc);
-    })
+    });
 });
 
 //	get lista de todos los marcadores este es uno de los endpoints

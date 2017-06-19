@@ -10,7 +10,7 @@ app.controller("TabOneCtrl", function ($scope) {
 
 
 app.controller('MapCtrl', ['$scope', '$http', '$location', 'NgMap', function ($scope, $http, $location, NgMap) {
-    
+    $scope.marker = null;
 	$scope.fbhref = $location.absUrl();
     var mapa;
 	
@@ -19,29 +19,21 @@ app.controller('MapCtrl', ['$scope', '$http', '$location', 'NgMap', function ($s
 	});
 	
     function getMarcadores() {
-			$http.get('/markerApplist').then(function (response) {
-				//	console.log(response.data);
-				$scope.markerApplist = response.data;
-			 });
+		$http.get('/markerApplist').then(function (response) {
+			//	console.log(response.data);
+			$scope.markerApplist = response.data;
+		 });
 	}
     
     getMarcadores();
 
-    var refresh = function () { 
-		$http.get("/comments").then(function (response) {
-       //console.log("data recibida");
-        	$scope.comments = response.data;
-       		$scope.comment = null;
-		});
-	};
-	
-   refresh();
-    
-    $scope.addComentario = function() {
-        //console.log($scope.comment);
-        $http.post("/comments", $scope.comment).then(function(response){
-            //console.log(response.data);
-            refresh();
+	/*
+		Agrega un comenario al marcador correspondiente
+	*/
+	$scope.addComentario = function(id) {
+		$http.post("/comments/"+id, $scope.comment).then(function(response){
+            //console.log(response);
+           cargaComentariosApp(id);
         });
     };
     
@@ -52,7 +44,7 @@ app.controller('MapCtrl', ['$scope', '$http', '$location', 'NgMap', function ($s
             map.setZoom(20);
             map.setCenter(new google.maps.LatLng(marker.lat, marker.lng));
         });
-        
+        $scope.marker = marker;
         cargarComentarios(marker._id);
     }
     
@@ -66,10 +58,23 @@ app.controller('MapCtrl', ['$scope', '$http', '$location', 'NgMap', function ($s
     }
     
     function cargarComentarios(id){
-        $scope.fbhref = $location.absUrl()+"/"+id;
+        cargaComentariosFB(id);
+		cargaComentariosApp(id);
+	}
+    
+    function cargaComentariosFB(id) {
+		$scope.fbhref = $location.absUrl()+"/"+id;
         FB.XFBML.parse();
 	}
-
+	
+	function cargaComentariosApp(id) {
+		$http.get('/comments/'+id).then(function(response) {
+	   		//console.log("data recibida");
+			$scope.comments = response.data;
+			$scope.comment = null;
+		});
+	}  
+	
 }]);
 
 
