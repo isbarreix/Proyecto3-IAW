@@ -157,7 +157,7 @@ apiRoutes.post('/markerapplist', function(req, res) {
         vicinity: req.body.marker.vicinity,
         lat: req.body.marker.lat,
         lng: req.body.marker.lng,
-        /*rate: req.body.marker.rate,*/
+        rate: req.body.marker.rate,
         description: req.body.marker.description
 	});
     

@@ -18,8 +18,11 @@ html {
 body {
   line-height: 1.4;
   max-width: 1900px;
-  margin: 20px auto;
+  margin: auto !important;
+  position: relative !important;
+  top: 20px !important;
 }
+
 @media only screen and (min-width: 1600px){
   main-view md-toolbar:not(.md-menu-toolbar) {
     height: 240px;
@@ -69,10 +72,11 @@ md-button{
 .md-toolbar-tools, .md-toolbar-tools-estilo2 {
 
 }
+/*
 .md-toolbar-tools-estilo2 {
   background-color:  #82B1FF;
 }
-
+*/
 
 #map {
  height: 665px;
@@ -88,8 +92,23 @@ md-button{
 
 #searchFilter {
   font-size: 100%;
-  background-color:  #82B1FF;
   position: absolute;
+}
+
+#searchFilterInput {
+  color:#FFFFFF;
+}
+
+#searchFilter label {
+  color: white !important;
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+  background-color: #00BCD4;
+}
+
+#searchFilter.md-input-focused label {
+  color: white !important;
 }
 
 #mapAdmin {
@@ -99,7 +118,7 @@ md-button{
 }
 
 .form-control-estilo2 {
-  font-size: 55%;
+  font-size: 50%;
 }
 
 table thead tr th {
@@ -112,4 +131,9 @@ md-list-item:nth-child(even) {
 
 #commentlist{
   height: 300px;
+}
+
+.mySelect md-select-menu {
+  margin-left: 50px;
+  margin-top: 50px;
 }

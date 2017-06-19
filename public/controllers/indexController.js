@@ -10,6 +10,7 @@ app.controller("TabOneCtrl", function ($scope) {
 
 
 app.controller('MapCtrl', ['$scope', '$http', '$location', 'NgMap', function ($scope, $http, $location, NgMap) {
+    $scope.sortSelected = undefined;
     $scope.marker = null;
 	$scope.fbhref = $location.absUrl();
     var mapa;
@@ -122,10 +123,10 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
     getMarcadores();
     
 	function getMarcadores(){
-			$http.get('/markerApplist').then(function(response) {
-				//	console.log(response.data);
-				$scope.markerApplist = response.data;
-			 });
+		$http.get('/markerApplist').then(function(response) {
+			//	console.log(response.data);
+			$scope.markerApplist = response.data;
+		 });
 	}	
 	
 	$scope.addMarkerApp = function() {
@@ -141,12 +142,13 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 			vicinity : $scope.marker_g.vicinity,
 			lat : $scope.marker_g.lat,
 			lng : $scope.marker_g.lng,
-            /*rate: $scope.marker_g.rating,*/
+            rate: $scope.marker_g.rating,
             description: $scope.marker_g.description
 		}
 		addMarker(marker);
 		$scope.marker_g = null;
 		$scope.form_g = true;
+
 	}
     /*
       Metodo que se ecarga de agregar un marcador de la bd
