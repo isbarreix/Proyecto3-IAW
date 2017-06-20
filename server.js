@@ -4,7 +4,6 @@ const hostname = '127.0.0.1';
 const port = 3000;
 
 //Modulos requeridos
-=======
 var port = process.env.PORT || 3000;
 const path = require('path');
 
