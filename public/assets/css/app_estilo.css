@@ -113,7 +113,7 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 
 #mapAdmin {
   width: 30%; 
-  height: 50%; 
+  height: 43%; 
   position: absolute;
 }
 
@@ -166,4 +166,9 @@ md-list-item:nth-child(even) {
   padding: 12px 24px;
   width: 100%;
   margin: auto;
+}
+
+#in_name{
+  max-width: 50%;
+  
 }

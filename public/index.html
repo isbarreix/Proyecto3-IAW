@@ -90,9 +90,9 @@
                         </md-input-container>
                         <span flex></span>
                         <md-select md-container-class="mySelect" placeholder="Ordenar Por" ng-model="sortSelected">
-                         <md-option value="name">Nombre</md-option>
-                         <md-option value="vicinity">Lugar</md-option>
-                         <md-option value="rate">Rank</md-option>
+                         <md-option value="name"><md-icon class="material-icons">local_atm</md-icon>Nombre</md-option>
+                         <md-option value="vicinity"><md-icon class="material-icons">place</md-icon>Lugar</md-option>
+                         <md-option value="rate"><md-icon class="material-icons">rate_review</md-icon>Rank</md-option>
                         </md-select>
 
                      </div>
@@ -101,10 +101,10 @@
                     <md-list id="markerlist" class="make-scrollable" flex>
                       <md-list-item class="md-3-line" ng-repeat="marker in markerApplist |  orderBy: sortSelected | filter:filter" ng-click="mostrarLugar(marker)">
                         <div class="md-list-item-text">
-                          <h3><strong>Nombre:</strong> {{ marker.name }}</h3>
-                          <h3><strong>Lugar:</strong> {{ marker.vicinity }}</h3>
-                          <h3><strong>Rank:</strong> {{ marker.rate }}</h3>
-                          <h4><strong>Descripción: </strong>{{ marker.description }}</h4>
+                          <h3><md-icon class="material-icons">local_atm</md-icon><strong>Nombre:</strong> {{ marker.name }}</h3>
+                          <h3><md-icon class="material-icons">place</md-icon><strong>Lugar:</strong> {{ marker.vicinity }}</h3>
+                          <h3><md-icon class="material-icons">rate_review</md-icon><strong>Rank:</strong> {{ marker.rate }}</h3>
+                          <h4><md-icon class="material-icons">local_post_office</md-icon><strong>Descripción: </strong>{{ marker.description }}</h4>
                         </div>
                         <md-divider inset></md-divider>
                       </md-list-item>
@@ -117,18 +117,8 @@
                 
                 <!--Mapa-->
                 <div flex="66" class="map-container">
-                  <ng-map zoom="10" center="-38.70, -62.27" id="map">
-
-					<info-window id="iw_mkr_app">
-                      <div ng-non-bindable="">
-                        id: {{ marker_app._id}}<br/>
-                        name: {{ marker_app.name}}<br/>
-                      </div>
-                    </info-window>	 
-					  
-
+                  <ng-map zoom="10" center="-38.70, -62.27" id="map">	  
                     <marker ng-repeat="m in markerApplist" position="{{ m.lat }}, {{ m.lng }}" on-click="mostrarLugarMarker(m)"></marker>
-
                   </ng-map>
                 </div>
               </div> 
@@ -136,13 +126,15 @@
 
               <div layout="row">
                 <div flex=33 layout="column">
-                  <h3>Agregar Comentario</h3>
+                  <h2>Agrega un comentario</h2>
                   <md-input-container>
+                    <md-icon class="material-icons">person_pin_circle</md-icon>
                     <label>Nombre</label>
-                    <input ng-model="comment.name">
+                    <input ng-model="comment.name" id="in_name">
                   </md-input-container>
                   <div layout="colum">
                     <md-input-container>
+                      <md-icon class="material-icons">comment</md-icon>
                       <label>Comentario</label>
                       <textarea ng-model="comment.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
                     </md-input-container>
@@ -164,8 +156,8 @@
                     </md-list-item>                    
                     <md-list-item class="md-3-line" ng-repeat="comment in comments">
                       <div class="md-list-item-text">
-                        <h3><strong>Nombre:</strong> {{ comment.name }}</h3>
-                        <h4><strong>Comentario:</strong>{{ comment.comment }}</h4>
+                        <h3><md-icon class="material-icons">person_pin_circle</md-icon><strong>Nombre:</strong> {{ comment.name }}</h3>
+                        <h4><md-icon class="material-icons">comment</md-icon><strong>Comentario:</strong>{{ comment.comment }}</h4>
                       </div>
                       <md-divider inset></md-divider>
                     </md-list-item>
@@ -196,19 +188,21 @@
               <div class="group">
                 <form name="login" class="login_form">
 
-                    <div layout="row" layout-xs="column" layout-sm="column" layout-align="center">
-                      <div flex-gt-sm="80">
-                          <md-input-container class="md-block" flex-gt-sm>
-                               <label>User</label>
-                              <input name="User" class="form-control" ng-model="admin.username">
-                          </md-input-container>
-                           <md-input-container class="md-block" flex-gt-sm>
-                               <label>Password</label>
-                              <input name="pass" class="form-control" type="password" ng-model="admin.password">
-                          </md-input-container>
-                          <md-button class="md-raised md-primary md-button-estilo2" ng-click="loginAdmin()">Login</md-button>
-                        </div>
+                  <div layout="row" layout-xs="column" layout-sm="column" layout-align="center">
+                    <div flex-gt-sm="80">
+                      <md-input-container class="md-block" flex-gt-sm>
+                        <md-icon class="material-icons">person</md-icon>
+                        <label>User</label>
+                        <input name="User" class="form-control" ng-model="admin.username">
+                      </md-input-container>
+                      <md-input-container class="md-block" flex-gt-sm>
+                        <md-icon class="material-icons">lock</md-icon>
+                        <label>Password</label>
+                        <input name="pass" class="form-control" type="password" ng-model="admin.password">
+                      </md-input-container>
+                      <md-button class="md-raised md-primary md-button-estilo2" ng-click="loginAdmin()">Login</md-button>
                     </div>
+                  </div>
 
                 </form>
               </div>
@@ -230,9 +224,9 @@
                           </md-input-container>
                           <span flex></span>
                           <md-select md-container-class="mySelect" placeholder="Ordenar Por" ng-model="sortSelected">
-                           <md-option value="name">Nombre</md-option>
-                           <md-option value="vicinity">Lugar</md-option>
-                           <md-option value="rate">Rank</md-option>
+                           <md-option value="name"><md-icon class="material-icons">local_atm</md-icon>Nombre</md-option>
+                           <md-option value="vicinity"><md-icon class="material-icons">place</md-icon>Lugar</md-option>
+                           <md-option value="rate"><md-icon class="material-icons">rate_review</md-icon>Rank</md-option>
                           </md-select>
 
                          </div>
@@ -242,13 +236,13 @@
 
                           <md-list-item class="md-3-line" ng-repeat="marker_app in markerApplist | orderBy: sortSelected | filter:filter" ng-click="editAppMarker(marker_app._id)">
                             <div class="md-list-item-text">
-                              <h3><strong>Nombre:</strong> {{ marker_app.name }}</h3>
-                              <h4><strong>ID:</strong>{{ marker_app._id }}</h4>
-                              <h3><strong>Lugar:</strong> {{ marker_app.vicinity }}</h3>
-                              <h3><strong>Rank:</strong> {{ marker_app.rate }}</h3>							  
-                              <h4><strong>Decripción:</strong> {{ marker_app.description; }}</h4>
-                              <h3><strong>Lat</strong> {{ marker_app.lat }}</h3>
-                              <h3><strong>Lng:</strong> {{ marker_app.lng }}</h3>
+                              <h3><md-icon class="material-icons">local_atm</md-icon><strong>Nombre:</strong> {{ marker_app.name }}</h3>
+                              <h4><md-icon class="material-icons">local_offer</md-icon><strong>ID:</strong>{{ marker_app._id }}</h4>
+                              <h3><md-icon class="material-icons">place</md-icon><strong>Lugar:</strong> {{ marker_app.vicinity }}</h3>
+                              <h3><md-icon class="material-icons">rate_review</md-icon><strong>Rank:</strong> {{ marker_app.rate }}</h3>							  
+                              <h4><md-icon class="material-icons">local_post_office</md-icon><strong>Decripción:</strong> {{ marker_app.description; }}</h4>
+                              <h3><md-icon class="material-icons">public</md-icon><strong>Lat</strong> {{ marker_app.lat }}</h3>
+                              <h3><md-icon class="material-icons">public</md-icon><strong>Lng:</strong> {{ marker_app.lng }}</h3>
                             </div>
                             <md-divider inset></md-divider>
                           </md-list-item>
@@ -268,9 +262,9 @@
                         </md-input-container>
                         <span flex></span>
                         <md-select md-container-class="mySelect" placeholder="Ordenar Por" ng-model="sortSelectedG">
-                         <md-option value="name">Nombre</md-option>
-                         <md-option value="vicinity">Lugar</md-option>
-                         <md-option value="rating">Rank</md-option>
+                         <md-option value="name"><md-icon class="material-icons">local_atm</md-icon>Nombre</md-option>
+                         <md-option value="vicinity"><md-icon class="material-icons">place</md-icon>Lugar</md-option>
+                         <md-option value="rating"><md-icon class="material-icons">rate_review</md-icon>Rank</md-option>
                         </md-select>
 
                        </div>
@@ -279,12 +273,12 @@
 
                         <md-list-item class="md-3-line" ng-repeat="marker_g in markerGooglelist | orderBy: sortSelectedG | filter:filterg" ng-click="editGoogleMarker(marker_g)">
                           <div class="md-list-item-text">
-                            <h3><strong>Nombre:</strong> {{ marker_g.name }}</h3>
-                            <h4><strong>ID:</strong> {{ marker_g.id }}</h4>
-                            <h3><strong>Lugar:</strong> {{ marker_g.vicinity }}</h3>
-                            <h3><strong>Rate:</strong> {{ marker_g.rating }}</h3>
-                            <h3><strong>Lat:</strong> {{ marker_g.geometry.location.lat() }}</h3>
-                            <h3><strong>Lng:</strong> {{ marker_g.geometry.location.lng() }}</h3>
+                            <h3><md-icon class="material-icons">local_atm</md-icon><strong>Nombre:</strong> {{ marker_g.name }}</h3>
+                            <h4><md-icon class="material-icons">local_offer</md-icon><strong>ID:</strong> {{ marker_g.id }}</h4>
+                            <h3><md-icon class="material-icons">place</md-icon><strong>Lugar:</strong> {{ marker_g.vicinity }}</h3>
+                            <h3><md-icon class="material-icons">rate_review</md-icon><strong>Rate:</strong> {{ marker_g.rating }}</h3>
+                            <h3><md-icon class="material-icons">public</md-icon><strong>Lat:</strong> {{ marker_g.geometry.location.lat() }}</h3>
+                            <h3><md-icon class="material-icons">public</md-icon><strong>Lng:</strong> {{ marker_g.geometry.location.lng() }}</h3>
                           </div>
                           <md-divider inset></md-divider>
                         </md-list-item>
@@ -306,12 +300,13 @@
           
               <div layout="row" layout-sm="column" id="formulariosAdmin">
                 <div flex>
+                  <h2><md-icon class="material-icons">edit_location</md-icon>Editar o agregar marcador desde la base de datos</h2>
                   <table data-md-table>
                     <tr md-row>
                     </tr>
                     <thead md-head>
                       <tr md-row>
-                        <th md-column>Editar desde la base de datos</th>
+                        <th md-column>&nbsp;</th>
                         <th md-column>&nbsp;</th>
                         <th md-column>&nbsp;</th>
                         <th md-column>&nbsp;</th>
@@ -327,37 +322,37 @@
                         <tr md-row>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Título</label>
+                              <label><md-icon class="material-icons">local_atm</md-icon>Nombre</label>
                               <textarea name="f_mrkr_app_name" class="form-control form-control-estilo2" ng-model="marker_app.name"></textarea>
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Locación</label>
+                              <label><md-icon class="material-icons">place</md-icon>Locación</label>
                               <textarea name="f_mrkr_app_vic" class="form-control form-control-estilo2" ng-model="marker_app.vicinity"></textarea>
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Descripción</label>
+                              <label><md-icon class="material-icons">local_post_office</md-icon>Descripción</label>
                               <textarea name="f_mkr_g_desc" class="form-control form-control-estilo2" ng-model="marker_app.description"></textarea>
                             </md-input-container>
                           </td>      
 						  <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Ranking</label>
+                              <label><md-icon class="material-icons">rate_review</md-icon>Ranking</label>
                               <input name="f_mrkr_app_rate" class="form-control form-control-estilo2" ng-model="marker_app.rate">
                             </md-input-container>
                           </td>
                           <td md-cell>                          
                             <md-input-container class="md-block" flex>
-                              <label>Latitud</label>
+                              <label><md-icon class="material-icons">public</md-icon>Latitud</label>
                               <input name="f_mrkr_app_lat" class="form-control form-control-estilo2" ng-model="marker_app.lat">
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Longitud</label>
+                              <label><md-icon class="material-icons">public</md-icon>Longitud</label>
                               <input name="f_mrkr_app_lng" class="form-control form-control-estilo2" ng-model="marker_app.lng">
                             </md-input-container>
                           </td>
@@ -368,9 +363,16 @@
                         </tr>
                       </form>                        
                     </tbody>
+                  </table>
+                </div>
+              </div>
+              <div layout="row" layout-sm="column">                 
+                <div flex>
+                 <h2><md-icon class="material-icons">add_location</md-icon>Agregar marcador desde Google Places</h2>
+                  <table data-md-table> 
 					<thead md-head>
                       <tr md-row>
-                        <th md-column>Agregar desde Google Places</th>
+                        <th md-column>&nbsp;</th>
                         <th md-column>&nbsp;</th>
                         <th md-column>&nbsp;</th>
                         <th md-column>&nbsp;</th>
@@ -386,37 +388,37 @@
                         <tr md-row>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Título</label>
+                              <label><md-icon class="material-icons">local_atm</md-icon>Nombre</label>
                               <textarea name="f_mrkr_g_name" class="form-control form-control-estilo2" ng-model="marker_g.name" ng-disabled="form_g"></textarea>
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Locación</label>
+                              <label><md-icon class="material-icons">place</md-icon>Locación</label>
                               <textarea name="f_mkr_g_vic" class="form-control form-control-estilo2" ng-model="marker_g.vicinity" ng-disabled="form_g"></textarea>
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Descripción</label>
+                              <label><md-icon class="material-icons">local_post_office</md-icon>Descripción</label>
                               <textarea name="f_mkr_g_desc" class="form-control form-control-estilo2" ng-model="marker_g.description" ng-disabled="form_g"></textarea>
                             </md-input-container>
                           </td>       
 						  <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Ranking</label>
+                              <label><md-icon class="material-icons">rate_review</md-icon>Ranking</label>
                               <input name="f_mrkr_g_rate" class="form-control form-control-estilo2" ng-model="marker_g.rating" ng-disabled="form_g">
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Latitud</label>
+                              <label><md-icon class="material-icons">public</md-icon>Latitud</label>
                               <input name="f_mkr_g_lat" class="form-control form-control-estilo2"  ng-model="marker_g.lat" ng-disabled="form_g">
                             </md-input-container>
                           </td>
                           <td md-cell>
                             <md-input-container class="md-block" flex>
-                              <label>Longitud</label>
+                              <label><md-icon class="material-icons">public</md-icon>Longitud</label>
                               <input name="f_marker_g_lng" class="form-control form-control-estilo2" ng-model="marker_g.lng" ng-disabled="form_g">
                             </md-input-container>
                           </td>
