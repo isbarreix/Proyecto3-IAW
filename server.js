@@ -4,6 +4,8 @@ const hostname = '127.0.0.1';
 const port = 3000;
 
 //Modulos requeridos
+=======
+var port = process.env.PORT || 3000;
 const path = require('path');
 
 
@@ -277,9 +279,9 @@ app.get("/readme", function(req, res) {
 // start the server ================================================
 // =================================================================
 
-
+/*
 app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
-});
-
+});*/
+app.listen(port);
 
