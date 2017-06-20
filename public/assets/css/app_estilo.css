@@ -169,6 +169,58 @@ md-list-item:nth-child(even) {
 }
 
 #in_name{
-  max-width: 50%;
-  
+  max-width: 50%; 
+}
+
+#eti_bd{
+  background-color: #00BCD4;
+}
+
+#eti_g{
+  background-color: #ff5722;
+}
+
+#home{
+  background-color: #8BB69E;
+}
+
+#img_surf {
+  width: 100%;
+/*  margin-right: 0px !important;
+  margin-left: 0px !important;
+  margin: 0px !important;
+  padding: 0px !important;*/
+}
+
+#div_surf {
+  background-color: #1565c0;
+}
+
+.div-white {
+  background-color: #FFFFFF;
+}
+.div-yellow {
+  background-color: #cddc39;
+}
+
+#videoHome {
+
+}
+
+.div-home {
+  padding-top: 100px;
+  padding-bottom: 150px;
+}
+
+.md-card-image {
+  width: 100%;
+  height: auto;
+}
+
+.carta{
+  width: 350px;
+}
+
+.iconcard {
+  font-size: 24px !important;
 }

@@ -11,8 +11,10 @@
     <link rel="stylesheet" href="/modules/angular-material/angular-material.min.css">
     <!-- Stylesheet propia-->
     <link rel="stylesheet" href="../assets/css/app_estilo.css">
+    <!--Angular Material Icons-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+    <!--Font awesome-->
+    <link  href="../assets/css/font-awesome.min.css" rel="stylesheet">
   </head>
 
   <body ng-app="AppMaps" ng-cloak>
@@ -43,28 +45,84 @@
       <md-tabs md-dynamic-height="" md-border-bottom="">
         <!--Page 1 Home-->
         <md-tab label="Home">
-          <md-content class="md-padding" ng-controller="TabOneCtrl">
-            
-            <div layout-gt-sm="row" layout="column" layout-margin>
-              <main flex-md="60">
-                <h1 class="md-display-3">
-                    Bienvenido a Spyglass: Buscador de bancos y ATMs
-                </h1>
+          <div ng-controller="TabOneCtrl">
+            <div layout-wrap id="div_surf">
+              <img id="img_surf" src="../img/plantilla01.png"/>
+            </div> 
+            <div layout-wrap class="div-home div-yellow">
+              <div layout-gt-sm="row" layout-align="center"> 
+                <main>
+                  <h1 class="md-display-4">
+                      <strong>Bienvenido a SPYGLASS</strong>
+                  </h1>
+                </main>
+              </div>
+              <div layout-gt-sm="row" layout="column" layout-padding>
+                <main flex=60>
+                  <h2 class="md-display-2">
+                    Esta aplicación logra encontrar los bancos y cajeros automáticos que son almacenados por un usuario registrado. Permite ver información, ver en un mapa y/o realizar comentarios de un marcador específico.
+                  </h2>
+                </main>
+                <div flex=40>
+                  <video id="videoHome" controls muted>
+                    <source src="../video/spyglass.mp4" type="video/mp4" />
+                  </video>
+                </div>
+              </div> 
+            </div>
 
-                <p class="md-subhead md-subhead-estilo2">
-                  Spyglass es un buscador de Bancos y ATMs implementado por dos estudaintes de Ingenieria en sistemas de Informacion en la universidad nacional del sur (UNS).
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu lectus vel libero porta dictum. Donec a lorem consequat, fermentum lorem sed, sollicitudin neque. Pellentesque placerat interdum orci, eget sodales tortor vehicula id.
-                </p>
-              </main>
+            <div layout-wrap class="div-home div-white">
+              <div layout-gt-sm="row" layout-align="center"> 
+                <main>
+                  <h1 class="md-display-4">
+                      <strong>About SPYGLASS</strong>
+                  </h1>
+                </main>
+              </div>
+              <div layout-gt-sm="row" layout="column" layout-padding>
+                <main flex>
+                  <h2 class="md-display-2">
+                    Diseñado y desarrollado por Barreix Iñaki y Cangelosi Juan Ignacio alumnos de Ingeniería de Aplicaciones Web (2017), DCIC, UNS.
+                  </h2>
+                  
+                </main>
+              </div> 
+              <div layout-gt-sm="row" layout="column" layout-align="space-around" layout-wrap>
 
-              <aside flex-md="20">
-                <img id="img_surf" src="../img/plantilla.png"/>
-              </aside>
-            </div>    
-        
-            <p><md-button ng-click="count = count + 1" class="md-raised md-primary">{{title}}</md-button> count: {{count}}</p>
-          
-          </md-content>
+                <md-card class="carta">
+                  <img src="../img/team/01.jpg" class="md-card-image" alt="Iñaki Barreix">
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-headline"><strong>Iñaki Barreix</strong></span>
+                    </md-card-title-text>
+                  </md-card-title>
+                  <md-card-actions layout="row" layout-align="space-around">
+                    <md-button href="https://twitter.com/isbarreix" aria-label="twitter"><md-icon class="fa fa-twitter iconcard"></md-icon></md-button>
+                    <md-button href="https://www.facebook.com/isbarreix" aria-label="facebook"><md-icon class="fa fa-facebook iconcard"></md-icon></md-button>
+                    <md-button href="https://github.com/isbarreix" aria-label="github"><md-icon class="fa fa-github iconcard"></md-icon></md-button>
+                  </md-card-actions>
+                </md-card>
+                <md-card class="carta">
+                  <img src="../img/team/02.jpg" class="md-card-image" alt="Juan Ignacio Cangelosi">
+                  <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-headline"><strong>Juan Ignacio Cangelosi</strong></span>
+                    </md-card-title-text>
+                  </md-card-title>
+
+                  <md-card-actions layout="row" layout-align="space-around">
+                    <md-button href="https://twitter.com/juanic95" aria-label="twitter"><md-icon class="fa fa-twitter iconcard"></md-icon></md-button>
+                    <md-button href="https://www.facebook.com/juanicange" aria-label="facebook"><md-icon class="fa fa-facebook iconcard"></md-icon></md-button>
+                    <md-button href="https://github.com/JuanCangelosi" aria-label="github"><md-icon class="fa fa-github iconcard"></md-icon></md-button>
+
+                  </md-card-actions>
+                </md-card>
+              </div>
+              
+              
+            </div>
+
+          </div>
         </md-tab>
         
         
@@ -73,8 +131,10 @@
           
           <md-content class="md-padding">
               <!--CONTENIDO PAGE 2 -->
-            <h3>Busca tu banco:</h3>
-            
+            <h1 class="md-display-3">Busca tu banco</h1>
+            <h2 class="md-display-1">A través de la lista de marcadores, o los marcadores que se encuentran en el mapa, podrás acceder a la informacion que contiene cada uno de ellos teniendo, además,
+              la posibilidad de poder comentar y que quede grabado tu mensaje en un marcador específico.
+            </h2>
             <div ng-controller="MapCtrl">
               <div layout="row" layout-sm="column" id="markerlist_view">
 
@@ -156,8 +216,8 @@
                     </md-list-item>                    
                     <md-list-item class="md-3-line" ng-repeat="comment in comments">
                       <div class="md-list-item-text">
-                        <h3><md-icon class="material-icons">person_pin_circle</md-icon><strong>Nombre:</strong> {{ comment.name }}</h3>
-                        <h4><md-icon class="material-icons">comment</md-icon><strong>Comentario:</strong>{{ comment.comment }}</h4>
+                        <h2><md-icon class="material-icons">person_pin_circle</md-icon><strong>Nombre:</strong> {{ comment.name }}</h2>
+                        <h3><md-icon class="material-icons">comment</md-icon><strong>Comentario:</strong>{{ comment.comment }}</h3>
                       </div>
                       <md-divider inset></md-divider>
                     </md-list-item>
@@ -183,8 +243,8 @@
 
             <md-content class="md-padding" ng-hide="registrado()">
               <!--CONTENIDO PAGE Login  -->
-              <h1>Login Administrador</h1>
-              <h2>Accede como administrador</h2>
+              <h1 class="md-display-3">Login Administrador</h1>
+              <h2 class="md-display-1">Accede como administrador</h2>
               <div class="group">
                 <form name="login" class="login_form">
 
@@ -209,8 +269,8 @@
               
           </md-content>
           <md-content class="md-padding" ng-style="{'visibility': registrado() ? 'visible':'hidden'}">
-            <h1 class="md-display-2">Panel Administrador</h1>
-            <h2>Edición de mapas: podras agregar un nuevo marcador de diferentes maneras: A través de la inscripción de un formulario por tu cuenta; Obtienendo una sugerencia de Google Places. Además podrás editar tus marcadores de la manera que quieras</h2>
+            <h1 class="md-display-3">Panel Administrador</h1>
+            <h2 class="md-display-1"><strong>Editor de marcadores:</strong> podrás agregar un nuevo marcador de diferentes maneras: A través de la inscripción de un formulario por tu cuenta; Obtienendo una sugerencia de Google Places. Además podrás editar tus marcadores de la manera que quieras</h2>
             <div>
               <div layout="row" layout-sm="column" id="markerlist_view">
 				  <div flex=33>
@@ -300,7 +360,7 @@
           
               <div layout="row" layout-sm="column" id="formulariosAdmin">
                 <div flex>
-                  <h2><md-icon class="material-icons">edit_location</md-icon>Editar o agregar marcador desde la base de datos</h2>
+                  <h2 id="eti_bd"><md-icon class="material-icons">edit_location</md-icon><strong>Editar o agregar marcador desde la base de datos</strong></h2>
                   <table data-md-table>
                     <tr md-row>
                     </tr>
@@ -368,7 +428,7 @@
               </div>
               <div layout="row" layout-sm="column">                 
                 <div flex>
-                 <h2><md-icon class="material-icons">add_location</md-icon>Agregar marcador desde Google Places</h2>
+                 <h2 id="eti_g"><md-icon class="material-icons">add_location</md-icon><strong>Agregar marcador desde Google Places</strong></h2>
                   <table data-md-table> 
 					<thead md-head>
                       <tr md-row>
