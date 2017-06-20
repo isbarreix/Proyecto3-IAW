@@ -264,14 +264,17 @@ app.get('/markerapplist/:id', function(req, res) {
     });
 });
 
-// get de markers por ciudad
-app.get('/markerapplistCity/:city', function(req, res) {
-    var city = req.params.city;
-    Marker.find({vicinity: '/'+city+'/'}, function(err, docs) {
-       res.json(docs); 
+app.get("/placeslist", function(req, res) {
+    
+    Marker.find(function (err, docs) {
+        var i=0;
+        var rta = [];
+        for (i=0; i<docs.length; i++){
+            rta[i]={name: docs[i].name, place: docs[i].vicinity };
+        }
+        res.json(rta);
     });
 });
-
 
 // =================================================================
 // start the server ================================================
