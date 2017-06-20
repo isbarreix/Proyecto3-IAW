@@ -102,8 +102,8 @@
                       <md-list-item class="md-3-line" ng-repeat="marker in markerApplist |  orderBy: sortSelected | filter:filter" ng-click="mostrarLugar(marker)">
                         <div class="md-list-item-text">
                           <h3><strong>Nombre:</strong> {{ marker.name }}</h3>
-                          <h4><strong>Lugar:</strong> {{ marker.vicinity }}</h4>
-                          <h4><strong>Rank:</strong> {{ marker.rate }}</h4>
+                          <h3><strong>Lugar:</strong> {{ marker.vicinity }}</h3>
+                          <h3><strong>Rank:</strong> {{ marker.rate }}</h3>
                           <h4><strong>Descripción: </strong>{{ marker.description }}</h4>
                         </div>
                         <md-divider inset></md-divider>
@@ -166,7 +166,6 @@
                       <div class="md-list-item-text">
                         <h3><strong>Nombre:</strong> {{ comment.name }}</h3>
                         <h4><strong>Comentario:</strong>{{ comment.comment }}</h4>
-                        <h4><strong>Descripción:</strong>{{ marker.description }}</h4>
                       </div>
                       <md-divider inset></md-divider>
                     </md-list-item>
@@ -189,31 +188,35 @@
         <!--Page 3 Admin-->
         <md-tab label="Admin">
           <div ng-controller="AdminCtrl">
-          
+
             <md-content class="md-padding" ng-hide="registrado()">
               <!--CONTENIDO PAGE Login  -->
-              <div>
-              <form name="login">
-                  <div layout="row" layout-xs="column" layout-sm="column" layout-align="space-between center">
-                    <div flex-gt-sm="80">
-                        <md-input-container class="md-block" flex-gt-sm>
-                             <label>User</label>
-                            <input name="User" class="form-control" ng-model="admin.username">
-                        </md-input-container>
-                         <md-input-container class="md-block" flex-gt-sm>
-                             <label>Password</label>
-                            <input name="pass" class="form-control" type="password" ng-model="admin.password">
-                        </md-input-container>
-                        <md-button class="md-raised md-primary" ng-click="loginAdmin()">Log In</md-button>
-                      </div>
-                  </div>
-                          
-              </form>
+              <h1>Login Administrador</h1>
+              <h2>Accede como administrador</h2>
+              <div class="group">
+                <form name="login" class="login_form">
+
+                    <div layout="row" layout-xs="column" layout-sm="column" layout-align="center">
+                      <div flex-gt-sm="80">
+                          <md-input-container class="md-block" flex-gt-sm>
+                               <label>User</label>
+                              <input name="User" class="form-control" ng-model="admin.username">
+                          </md-input-container>
+                           <md-input-container class="md-block" flex-gt-sm>
+                               <label>Password</label>
+                              <input name="pass" class="form-control" type="password" ng-model="admin.password">
+                          </md-input-container>
+                          <md-button class="md-raised md-primary md-button-estilo2" ng-click="loginAdmin()">Login</md-button>
+                        </div>
+                    </div>
+
+                </form>
               </div>
+              
           </md-content>
           <md-content class="md-padding" ng-style="{'visibility': registrado() ? 'visible':'hidden'}">
             <h1 class="md-display-2">Panel Administrador</h1>
-            <p>Edición de mapas: podras agregar un nuevo marcador de diferentes maneras: A través de la inscripción de un formulario por tu cuenta; Obtienendo una sugerencia de Google Places. Además podrás editar tus marcadores de la manera que quieras</p>
+            <h2>Edición de mapas: podras agregar un nuevo marcador de diferentes maneras: A través de la inscripción de un formulario por tu cuenta; Obtienendo una sugerencia de Google Places. Además podrás editar tus marcadores de la manera que quieras</h2>
             <div>
               <div layout="row" layout-sm="column" id="markerlist_view">
 				  <div flex=33>
@@ -221,16 +224,16 @@
 					   <md-toolbar md-scroll-shrink>
                          <div class="md-toolbar-tools md-toolbar-tools-estilo2">
 
-                            <md-input-container id="searchFilter">
-                              <input id="searchFilterInput" placeholder="Buscar en bd" ng-model="filter.$">
+                          <md-input-container id="searchFilter">
+                              <input id="searchFilterInput" placeholder="Base de datos" ng-model="filter.$">
                               <md-icon class="material-icons">search</md-icon>
-                            </md-input-container>
-                            <span flex></span>
-                            <md-select md-container-class="mySelect" placeholder="Ordenar Por" ng-model="sortSelected">
-                             <md-option value="name">Nombre</md-option>
-                             <md-option value="vicinity">Lugar</md-option>
-                             <md-option value="rate">Rank</md-option>
-                            </md-select>
+                          </md-input-container>
+                          <span flex></span>
+                          <md-select md-container-class="mySelect" placeholder="Ordenar Por" ng-model="sortSelected">
+                           <md-option value="name">Nombre</md-option>
+                           <md-option value="vicinity">Lugar</md-option>
+                           <md-option value="rate">Rank</md-option>
+                          </md-select>
 
                          </div>
                         </md-toolbar>
@@ -241,11 +244,11 @@
                             <div class="md-list-item-text">
                               <h3><strong>Nombre:</strong> {{ marker_app.name }}</h3>
                               <h4><strong>ID:</strong>{{ marker_app._id }}</h4>
-                              <h4><strong>Lugar:</strong> {{ marker_app.vicinity }}</h4>
-                              <h4><strong>Rank:</strong> {{ marker_app.rate }}</h4>							  
-                              <h4><strong>Decription:</strong> {{ marker_app.description; }}</h4>
-                              <h4><strong>Lat</strong> {{ marker_app.lat }}</h4>
-                              <h4><strong>Lng:</strong> {{ marker_app.lng }}</h4>
+                              <h3><strong>Lugar:</strong> {{ marker_app.vicinity }}</h3>
+                              <h3><strong>Rank:</strong> {{ marker_app.rate }}</h3>							  
+                              <h4><strong>Decripción:</strong> {{ marker_app.description; }}</h4>
+                              <h3><strong>Lat</strong> {{ marker_app.lat }}</h3>
+                              <h3><strong>Lng:</strong> {{ marker_app.lng }}</h3>
                             </div>
                             <md-divider inset></md-divider>
                           </md-list-item>
@@ -256,22 +259,36 @@
 				</div>  
                   <div flex=33>
                     <md-content>
-				      <h3>Servicio Google</h3>
+                      <md-toolbar md-scroll-shrink id="toolbar-google">
+                       <div class="md-toolbar-tools md-toolbar-tools-estilo2 md-toolbar-tools-estilo3">
+
+                        <md-input-container id="searchFilter">
+                            <input id="searchFilterInput" placeholder="Servicio Google" ng-model="filterg.$">
+                            <md-icon class="material-icons">search</md-icon>
+                        </md-input-container>
+                        <span flex></span>
+                        <md-select md-container-class="mySelect" placeholder="Ordenar Por" ng-model="sortSelectedG">
+                         <md-option value="name">Nombre</md-option>
+                         <md-option value="vicinity">Lugar</md-option>
+                         <md-option value="rating">Rank</md-option>
+                        </md-select>
+
+                       </div>
+                      </md-toolbar>
                       <md-list id="markerlist" class="make-scrollable" flex>
 
-                        <md-list-item class="md-3-line" ng-repeat="marker_g in markerGooglelist" ng-click="editGoogleMarker(marker_g)">
+                        <md-list-item class="md-3-line" ng-repeat="marker_g in markerGooglelist | orderBy: sortSelectedG | filter:filterg" ng-click="editGoogleMarker(marker_g)">
                           <div class="md-list-item-text">
                             <h3><strong>Nombre:</strong> {{ marker_g.name }}</h3>
                             <h4><strong>ID:</strong> {{ marker_g.id }}</h4>
-                            <h4><strong>Lugar:</strong> {{ marker_g.vicinity }}</h4>
-                            <h4><strong>Rate:</strong> {{ marker_g.rating }}</h4>
-                            <h4><strong>Lat:</strong> {{ marker_g.geometry.location.lat() }}</h4>
-                            <h4><strong>Lng:</strong> {{ marker_g.geometry.location.lng() }}</h4>
+                            <h3><strong>Lugar:</strong> {{ marker_g.vicinity }}</h3>
+                            <h3><strong>Rate:</strong> {{ marker_g.rating }}</h3>
+                            <h3><strong>Lat:</strong> {{ marker_g.geometry.location.lat() }}</h3>
+                            <h3><strong>Lng:</strong> {{ marker_g.geometry.location.lng() }}</h3>
                           </div>
                           <md-divider inset></md-divider>
                         </md-list-item>
-
-                      </md-list>
+                    </md-list>
 
                     </md-content>
 				</div>  
@@ -287,7 +304,7 @@
                 </div>
               </div> 
           
-              <div layout="row" layout-sm="column">
+              <div layout="row" layout-sm="column" id="formulariosAdmin">
                 <div flex>
                   <table data-md-table>
                     <tr md-row>
@@ -329,7 +346,7 @@
 						  <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Ranking</label>
-                              <textarea name="f_mrkr_app_rate" class="form-control form-control-estilo2" ng-model="marker_app.rate"></textarea>
+                              <input name="f_mrkr_app_rate" class="form-control form-control-estilo2" ng-model="marker_app.rate">
                             </md-input-container>
                           </td>
                           <td md-cell>                          
@@ -388,7 +405,7 @@
 						  <td md-cell>
                             <md-input-container class="md-block" flex>
                               <label>Ranking</label>
-                              <textarea name="f_mrkr_g_rate" class="form-control form-control-estilo2" ng-model="marker_g.rating" ng-disabled="form_g"></textarea>
+                              <input name="f_mrkr_g_rate" class="form-control form-control-estilo2" ng-model="marker_g.rating" ng-disabled="form_g">
                             </md-input-container>
                           </td>
                           <td md-cell>
