@@ -3,7 +3,7 @@ var app = angular.module('AppMaps', ['ngMaterial', 'ngMap']);
 var token;
 var registrado = false;
 app.controller("TabOneCtrl", function ($scope) {
-	$scope.title = "Count Upwards";
+
 
 });
 
@@ -257,22 +257,12 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
     }*/
 
 }]);
-/*
-	google.maps.event.addListener(marker, 'click', function() {
-			infowindow.setContent(place.name);
-			infowindow.open(map, this);
-		});
-	}
-    
-
-<<<<<<< HEAD
-;*/
 
 
 
 app.controller("LoginController",['$scope','$http', function($scope,$http) {
     
-    $scope.loginAdmin = function(){
+    $scope.loginAdmin = function() {
         $http.post("/api/login", $scope.admin).then(function(response){
             //console.log(response.data.token);
             token = response.data.token;
@@ -283,4 +273,3 @@ app.controller("LoginController",['$scope','$http', function($scope,$http) {
         });
     }
 }]);
-
