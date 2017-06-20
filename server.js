@@ -1,5 +1,9 @@
+
+//Data del server
 const hostname = '127.0.0.1';
 const port = 3000;
+
+//Modulos requeridos
 const path = require('path');
 
 
@@ -12,12 +16,10 @@ var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var config = require('./config'); // get our config file
 
 
-var db = mongojs('comments', ['comments']);
-var dbMarkerApp = mongojs('markerlist', ['markerlist']);
 var bodyParser = require("body-parser");
 var app = express();
 
-
+//Modelos
 var Admin= require("./public/models/admin.js");
 var Marker= require("./public/models/marker.js");
 var Comment= require("./public/models/comment.js");
@@ -70,7 +72,6 @@ var apiRoutes = express.Router();
 // ---------------------------------------------------------
 // authentication (no middleware necessary since this isnt authenticated)
 // ---------------------------------------------------------
-// http://localhost:8080/api/authenticate
 apiRoutes.post('/login', function(req, res) {
 	// find the user
 	Admin.findOne({
@@ -151,7 +152,6 @@ apiRoutes.get('/', function(req, res) {
 
 apiRoutes.post('/markerapplist', function(req, res) {
     //se crea el modelo marker
-    //falta validar
     var marker = new Marker({ 
 		name: req.body.marker.name,
         vicinity: req.body.marker.vicinity,
@@ -163,15 +163,8 @@ apiRoutes.post('/markerapplist', function(req, res) {
     
 	marker.save( function(err) {
 		if (err) throw err;
-
-		//console.log('Marker saved successfully');
 		res.json({ success: true });
 	});
-    
-	/*dbMarkerApp.markerlist.insert(req.body.marker, function(err, docs) {
-       res.json(docs); 
-    });
-    */
 });
 
 

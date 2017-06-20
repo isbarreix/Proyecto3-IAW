@@ -2,12 +2,10 @@ var app = angular.module('AppMaps', ['ngMaterial', 'ngMap']);
 
 var token;
 var registrado = false;
-app.controller("TabOneCtrl", function ($scope) {
 
-
-});
-
-//	Documentacion api
+/**
+Controlador de la vista de usuario
+**/
 
 
 app.controller('MapCtrl', ['$scope', '$http', '$location', 'NgMap', function ($scope, $http, $location, NgMap) {
@@ -79,6 +77,10 @@ app.controller('MapCtrl', ['$scope', '$http', '$location', 'NgMap', function ($s
 	
 }]);
 
+
+/**
+Controlador de la vista de administrador
+**/
 
 app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http, NgMap) {
     var mapa; 
@@ -230,46 +232,15 @@ app.controller('AdminCtrl', ['$scope', '$http', 'NgMap', function ($scope, $http
 		Muestra marcador en el panel
 	*/
 	function mostrarLugar(marker) {
-		//console.log("Entre a mostrarLugar con");
-        //console.log(marker);
-		//console.log(mapa);
 		mapa.setZoom(20);
         mapa.setCenter(new google.maps.LatLng(marker.lat, marker.lng));
    
     }
 	
 	function mostrarLugarG(marker) {
-		//console.log("Entre a mostrarLugar con");
-        //console.log(marker);
-		//console.log(mapa);
 		mapa.setZoom(20);
         mapa.setCenter(new google.maps.LatLng(marker.geometry.location.lat(), marker.geometry.location.lng()));
    
     }
-    
-   /* $scope.mostrarLugarMarker = function(marker){
-        //console.log("Entre a mostrarLugar con");
-        console.log(marker);
-        NgMap.getMap().then(function(map) {
-            map.setZoom(20);
-            map.setCenter(marker.latLng);
-        });
-    }*/
 
-}]);
-
-
-
-app.controller("LoginController",['$scope','$http', function($scope,$http) {
-    
-    $scope.loginAdmin = function() {
-        $http.post("/api/login", $scope.admin).then(function(response){
-            //console.log(response.data.token);
-            token = response.data.token;
-            registrado = response.data.success;
-        }), (function(reason) {
-          // rejection
-            registrado = false;
-        });
-    }
 }]);
